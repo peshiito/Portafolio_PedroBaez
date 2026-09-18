@@ -1,0 +1,80 @@
+.pb-process {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(2.5rem, 4vw, 3rem);
+  counter-reset: stage;
+}
+
+@media (min-width: 768px) {
+  .pb-process {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .pb-process {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.5rem, 2.5vw, 2.25rem);
+  }
+}
+
+.pb-process__item {
+  position: relative;
+  padding-top: 2.5rem;
+}
+
+/* La línea que atraviesa las cuatro etapas */
+.pb-process__item::before {
+  content: '';
+  position: absolute;
+  top: 6.5px;
+  left: 0;
+  right: calc(-1 * clamp(1.5rem, 2.5vw, 2.25rem));
+  height: 1px;
+  background: var(--pb-rule);
+}
+
+.pb-process__item:last-child::before {
+  right: 0;
+}
+
+@media (max-width: 1099px) {
+  .pb-process__item::before {
+    right: 0;
+  }
+}
+
+.pb-process__node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--pb-bg);
+  border: 1px solid var(--pb-rule-strong);
+}
+
+/* Sólo la primera etapa va en rojo: es donde empieza el cliente */
+.pb-process__item:first-child .pb-process__node {
+  background: var(--pb-red);
+  border-color: var(--pb-red);
+}
+
+.pb-process__step {
+  margin-bottom: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.pb-process__title {
+  margin-bottom: 0.85rem;
+}
+
+.pb-process__text {
+  margin: 0;
+  color: var(--pb-fg-muted);
+  max-width: 34ch;
+  text-wrap: pretty;
+}

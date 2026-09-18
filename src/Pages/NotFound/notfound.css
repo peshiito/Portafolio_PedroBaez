@@ -1,0 +1,14 @@
+.pb-404 {
+  min-height: 60vh;
+  display: grid;
+  align-content: center;
+}
+
+.pb-404__title {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  margin: 0.75rem 0 1.25rem;
+}
+
+.pb-404__cta {
+  margin-top: 2rem;
+}

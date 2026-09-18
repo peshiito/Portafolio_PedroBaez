@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es" data-bs-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#FF3131" />
+
+    <title>Pedro Baez — Diseño y desarrollo web para negocios</title>
+    <meta name="description" content="Hago sitios web a medida para negocios que ya funcionan bien en persona y todavía no en internet. Precio cerrado, entrega en dos semanas." />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Pedro Baez — Diseño y desarrollo web para negocios" />
+    <meta property="og:description" content="Sitios web a medida para pymes, comercios y emprendimientos. Sin plantillas." />
+    <meta property="og:locale" content="es_AR" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <script>
+      // Aplica el tema antes del primer paint para que no haya destello.
+      (function () {
+        try {
+          var t = localStorage.getItem('pb-theme');
+          if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-bs-theme', t);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

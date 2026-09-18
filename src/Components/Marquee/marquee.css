@@ -1,0 +1,56 @@
+.pb-marquee {
+  display: flex;
+  overflow: hidden;
+  padding-block: clamp(1rem, 2.2vw, 1.5rem);
+  border-block: 1px solid transparent;
+  user-select: none;
+}
+
+.pb-marquee__track {
+  display: flex;
+  align-items: center;
+  flex: none;
+  min-width: 100%;
+  animation: pb-slide 34s linear infinite;
+}
+
+.pb-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding-inline: clamp(0.75rem, 2vw, 1.5rem);
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+  white-space: nowrap;
+}
+
+.pb-marquee__item .pb-display {
+  font-size: inherit;
+}
+
+.pb-marquee__star {
+  color: var(--pb-red);
+  flex: none;
+}
+
+@keyframes pb-slide {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Al pasar el mouse se frena: deja leer sin perseguir el texto */
+@media (hover: hover) and (pointer: fine) {
+  .pb-marquee:hover .pb-marquee__track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-marquee__track {
+    animation: none;
+  }
+  /* Sin movimiento, una sola pista alcanza */
+  .pb-marquee__track[aria-hidden='true'] {
+    display: none;
+  }
+}

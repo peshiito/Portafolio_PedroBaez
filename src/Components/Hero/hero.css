@@ -1,0 +1,166 @@
+.pb-hero {
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.pb-hero__eyebrow {
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  animation: pb-fade-up 700ms var(--pb-ease-out) both;
+}
+
+.pb-hero__top {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .pb-hero__top {
+    /* El titular manda; la maqueta acompaña */
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+}
+
+/* ---------- La presentación ---------- */
+
+.pb-hero__me {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  animation: pb-fade-up 800ms var(--pb-ease-out) both;
+  animation-delay: 80ms;
+}
+
+/* El retrato entra en la línea del titular: presenta a la persona sin
+   robarle protagonismo al nombre. */
+.pb-hero__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: clamp(56px, 8vw, 88px);
+  height: clamp(56px, 8vw, 88px);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-rule-strong);
+  color: var(--pb-fg-muted);
+}
+
+.pb-hero__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.pb-hero__avatar .pb-mono {
+  font-size: clamp(0.8rem, 1.6vw, 1.05rem);
+  letter-spacing: 0.08em;
+}
+
+.pb-hero__title {
+  font-size: clamp(2.5rem, 6.2vw, 5.25rem);
+  margin: 0;
+}
+
+.pb-hero__title-red {
+  color: var(--pb-red-display);
+}
+
+.pb-hero__lead {
+  max-width: 48ch;
+  animation: pb-fade-up 800ms var(--pb-ease-out) both;
+  animation-delay: 200ms;
+}
+
+.pb-hero__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  margin-top: clamp(1.75rem, 3vw, 2.25rem);
+  animation: pb-fade-up 800ms var(--pb-ease-out) both;
+  animation-delay: 300ms;
+}
+
+/* ---------- La maqueta ---------- */
+
+.pb-hero__mock {
+  animation: pb-fade-up 900ms var(--pb-ease-out) both;
+  animation-delay: 160ms;
+}
+
+.pb-hero__mock .pb-mock {
+  border: 1px solid var(--pb-rule);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.06);
+}
+
+[data-bs-theme='dark'] .pb-hero__mock .pb-mock {
+  box-shadow: 0 0 0 1px rgba(228, 226, 221, 0.06);
+}
+
+.pb-hero__mock-note {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.pb-hero__mock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pb-red);
+  flex: none;
+}
+
+/* ---------- Números ---------- */
+
+.pb-hero__stats {
+  list-style: none;
+  margin: clamp(3rem, 6vw, 5rem) 0 0;
+  padding: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  border-top: 1px solid var(--pb-rule);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+  animation: pb-fade-up 800ms var(--pb-ease-out) both;
+  animation-delay: 420ms;
+}
+
+.pb-hero__stats li {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.pb-hero__stat-n {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 0.8;
+}
+
+@keyframes pb-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-hero__eyebrow,
+  .pb-hero__me,
+  .pb-hero__lead,
+  .pb-hero__actions,
+  .pb-hero__mock,
+  .pb-hero__stats {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

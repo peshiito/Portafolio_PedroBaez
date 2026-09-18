@@ -1,0 +1,210 @@
+/* ---------- Maqueta dibujada ---------- */
+
+.pb-mock {
+  container-type: inline-size;
+  aspect-ratio: 4 / 3;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  font-size: 0;
+}
+
+.pb-mock__chrome {
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 1.2cqw, 8px);
+  padding: clamp(8px, 2.2cqw, 16px) clamp(10px, 2.6cqw, 20px);
+  background: color-mix(in srgb, var(--ink) 8%, var(--paper));
+  flex: none;
+}
+
+.pb-mock__chrome i {
+  width: clamp(6px, 1.5cqw, 11px);
+  height: clamp(6px, 1.5cqw, 11px);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 22%, var(--paper));
+}
+
+.pb-mock__url {
+  margin-left: clamp(8px, 2cqw, 16px);
+  height: clamp(7px, 1.8cqw, 13px);
+  flex: 1;
+  max-width: 45%;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 12%, var(--paper));
+}
+
+.pb-mock__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(10px, 2.2cqw, 20px);
+  gap: clamp(8px, 2.2cqw, 18px);
+}
+
+.pb-mock__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pb-mock__logo {
+  width: clamp(20px, 5.5cqw, 44px);
+  height: clamp(8px, 2.4cqw, 18px);
+  background: var(--accent);
+}
+
+.pb-mock__links {
+  display: flex;
+  gap: clamp(6px, 1.7cqw, 13px);
+}
+
+.pb-mock__links i {
+  width: clamp(14px, 4cqw, 32px);
+  height: clamp(4px, 1.3cqw, 9px);
+  background: color-mix(in srgb, var(--ink) 30%, var(--paper));
+}
+
+.pb-mock__stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(6px, 1.7cqw, 13px);
+}
+
+.pb-mock__h1 {
+  height: clamp(12px, 4.4cqw, 34px);
+  width: 78%;
+  background: var(--ink);
+}
+
+.pb-mock__h1--short {
+  width: 48%;
+}
+
+.pb-mock__p {
+  height: clamp(5px, 1.5cqw, 11px);
+  width: 62%;
+  margin-top: clamp(4px, 1.2cqw, 9px);
+  background: color-mix(in srgb, var(--ink) 35%, var(--paper));
+}
+
+.pb-mock__btn {
+  height: clamp(14px, 4cqw, 30px);
+  width: 30%;
+  margin-top: clamp(7px, 2cqw, 15px);
+  background: var(--accent);
+}
+
+.pb-mock__tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(6px, 1.7cqw, 13px);
+  flex: none;
+  height: 26%;
+}
+
+.pb-mock__tiles span {
+  background: color-mix(in srgb, var(--ink) 16%, var(--paper));
+}
+
+/* Variantes: la estructura cambia según el tipo de negocio */
+.pb-mock--grid .pb-mock__stage {
+  flex-direction: row;
+  align-items: stretch;
+}
+.pb-mock--grid .pb-mock__h1 {
+  width: 40%;
+  height: auto;
+}
+.pb-mock--grid .pb-mock__h1--short {
+  width: 26%;
+  background: var(--accent);
+}
+.pb-mock--grid .pb-mock__p,
+.pb-mock--grid .pb-mock__btn {
+  display: none;
+}
+.pb-mock--grid .pb-mock__tiles {
+  grid-template-columns: repeat(4, 1fr);
+  height: 20%;
+}
+
+.pb-mock--catalog .pb-mock__stage {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: clamp(6px, 1.7cqw, 13px);
+}
+.pb-mock--catalog .pb-mock__h1 {
+  width: 100%;
+  height: clamp(10px, 3.4cqw, 26px);
+}
+.pb-mock--catalog .pb-mock__h1--short,
+.pb-mock--catalog .pb-mock__p {
+  display: none;
+}
+.pb-mock--catalog .pb-mock__btn {
+  width: 22%;
+  margin-top: 4px;
+}
+.pb-mock--catalog .pb-mock__tiles {
+  grid-template-columns: repeat(2, 1fr);
+  height: 38%;
+}
+
+.pb-mock--calm .pb-mock__stage {
+  align-items: center;
+  text-align: center;
+}
+.pb-mock--calm .pb-mock__h1 {
+  width: 66%;
+  border-radius: 999px;
+}
+.pb-mock--calm .pb-mock__h1--short {
+  width: 40%;
+  border-radius: 999px;
+}
+.pb-mock--calm .pb-mock__p {
+  width: 50%;
+  border-radius: 999px;
+}
+.pb-mock--calm .pb-mock__btn {
+  border-radius: 999px;
+  width: 34%;
+}
+.pb-mock--calm .pb-mock__tiles span {
+  border-radius: 8px;
+}
+
+/* ---------- Se arma sola (sólo en el hero) ---------- */
+
+.pb-mock.is-building .pb-mock__chrome,
+.pb-mock.is-building .pb-mock__nav,
+.pb-mock.is-building .pb-mock__stage > span,
+.pb-mock.is-building .pb-mock__tiles > span {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: pb-mock-build 520ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 240ms);
+}
+
+@keyframes pb-mock-build {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-mock.is-building .pb-mock__chrome,
+  .pb-mock.is-building .pb-mock__nav,
+  .pb-mock.is-building .pb-mock__stage > span,
+  .pb-mock.is-building .pb-mock__tiles > span {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

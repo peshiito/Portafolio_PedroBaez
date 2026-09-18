@@ -1,0 +1,204 @@
+.pb-contact__grid {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+@media (min-width: 992px) {
+  .pb-contact__grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+}
+
+.pb-contact__title {
+  font-size: clamp(2.25rem, 5.4vw, 4.5rem);
+  max-width: 13ch;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  text-wrap: balance;
+}
+
+.pb-contact__title-red {
+  color: var(--pb-red-display);
+}
+
+/* El camino rápido va primero y con más peso: el que quiere respuesta ya
+   no debería tener que completar cinco campos para pedirla. */
+.pb-contact__rapido {
+  margin-bottom: clamp(2rem, 4vw, 2.75rem);
+  padding-bottom: clamp(1.75rem, 3.5vw, 2.25rem);
+  border-bottom: 1px solid var(--pb-rule);
+}
+
+.pb-contact__wa {
+  gap: 0.65rem;
+}
+
+.pb-contact__wa-nota {
+  margin-top: 0.85rem;
+}
+
+.pb-contact__channels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.pb-contact__channels li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--pb-fg-muted);
+}
+
+.pb-contact__channels a {
+  color: var(--pb-fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pb-rule-strong);
+  padding-bottom: 1px;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pb-contact__channels a:hover {
+    color: var(--pb-red-text);
+    border-color: var(--pb-red-text);
+  }
+}
+
+/* ---------- Formulario ---------- */
+
+.pb-contact__card {
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-rule);
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+.pb-contact__card-titulo {
+  margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--pb-rule);
+}
+
+.pb-field {
+  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.pb-field label {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--pb-fg-muted);
+}
+
+/* Campos con una sola línea abajo: menos caja, más formulario de papel */
+.pb-field input,
+.pb-field select,
+.pb-field textarea {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--pb-rule-strong);
+  border-radius: 0;
+  padding: 0.65rem 0;
+  color: var(--pb-fg);
+  font-family: 'Archivo', sans-serif;
+  font-size: 1.0625rem;
+  transition: border-color 220ms ease;
+}
+
+.pb-field textarea {
+  resize: vertical;
+  min-height: 6.5rem;
+}
+
+.pb-field select {
+  /* Windows en modo oscuro necesita estos dos explícitos */
+  background-color: var(--pb-surface);
+  color: var(--pb-fg);
+  cursor: pointer;
+}
+
+.pb-field input::placeholder,
+.pb-field textarea::placeholder {
+  color: var(--pb-fg-muted);
+  opacity: 0.65;
+}
+
+.pb-field input:focus,
+.pb-field select:focus,
+.pb-field textarea:focus {
+  outline: none;
+  border-color: var(--pb-red);
+}
+
+.pb-field input:focus-visible,
+.pb-field select:focus-visible,
+.pb-field textarea:focus-visible {
+  outline: 3px solid var(--pb-red);
+  outline-offset: 4px;
+}
+
+.pb-field [aria-invalid='true'] {
+  border-color: var(--pb-red);
+}
+
+.pb-field__error {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--pb-red-text);
+}
+
+.pb-contact__promise {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* ---------- Confirmación ---------- */
+
+.pb-contact__done {
+  display: grid;
+  gap: 1rem;
+  padding-block: clamp(1rem, 3vw, 2.5rem);
+}
+
+.pb-contact__done-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  color: var(--pb-red-text);
+  margin: 0;
+}
+
+.pb-contact__done p:not(.pb-contact__done-title) {
+  margin: 0;
+  max-width: 44ch;
+}
+
+.pb-contact__again {
+  justify-self: start;
+  background: none;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+/* Campo trampa: fuera de pantalla, sin ocuparlo con display:none, que algunos
+   bots detectan y saltean. */
+.pb-oculto {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.pb-contact__fallo {
+  margin-bottom: 1rem;
+}
+
+.pb-contact__fallo a {
+  color: inherit;
+}
+
+.pb-btn[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}

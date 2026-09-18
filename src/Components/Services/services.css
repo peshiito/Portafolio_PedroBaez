@@ -1,0 +1,165 @@
+.pb-svc {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--pb-rule);
+}
+
+/* Renglones de una orden de trabajo, no tarjetas flotando */
+.pb-svc__row {
+  border-bottom: 1px solid var(--pb-rule);
+  transition: background-color 320ms var(--pb-ease-out), color 320ms var(--pb-ease-out),
+    opacity 700ms var(--pb-ease-out), transform 700ms var(--pb-ease-out);
+}
+
+.pb-svc__row.is-open {
+  background: var(--pb-fg);
+  color: var(--pb-bg);
+  border-color: transparent;
+}
+
+.pb-svc__heading {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.pb-svc__trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(1.4rem, 3vw, 2rem) 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 160ms var(--pb-ease-out), padding-inline 320ms var(--pb-ease-out);
+}
+
+.pb-svc__row.is-open .pb-svc__trigger {
+  padding-inline: clamp(1rem, 2.5vw, 2rem);
+}
+
+.pb-svc__trigger:active {
+  transform: scale(0.994);
+}
+
+.pb-svc__code {
+  color: var(--pb-fg-muted);
+  font-variant-numeric: tabular-nums;
+  transition: color 320ms ease;
+}
+
+.pb-svc__row.is-open .pb-svc__code {
+  color: color-mix(in srgb, var(--pb-bg) 82%, var(--pb-fg));
+}
+
+.pb-svc__name {
+  font-size: clamp(1.75rem, 4.2vw, 2.9rem);
+  transition: color 320ms ease;
+}
+
+.pb-svc__row.is-open .pb-svc__name {
+  color: var(--pb-red-on-fg);
+}
+
+.pb-svc__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--pb-rule-strong);
+  flex: none;
+  transition: background-color 280ms var(--pb-ease-out), color 280ms var(--pb-ease-out),
+    border-color 280ms ease, transform 280ms var(--pb-ease-out);
+}
+
+.pb-svc__row.is-open .pb-svc__icon {
+  background: var(--pb-red);
+  border-color: var(--pb-red);
+  color: #fff;
+  transform: rotate(180deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pb-svc__row:not(.is-open) .pb-svc__trigger:hover .pb-svc__name {
+    color: var(--pb-red-text);
+  }
+  .pb-svc__row:not(.is-open) .pb-svc__trigger:hover .pb-svc__icon {
+    background: var(--pb-fg);
+    color: var(--pb-bg);
+    border-color: var(--pb-fg);
+  }
+}
+
+/* 0fr → 1fr anima la apertura sin tener que medir la altura en JS */
+.pb-svc__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 380ms var(--pb-ease-out);
+}
+
+.pb-svc__row.is-open .pb-svc__panel {
+  grid-template-rows: 1fr;
+}
+
+/* El ítem de la grilla no lleva padding propio: si lo llevara, el panel
+   cerrado conservaría ese alto en vez de colapsar a cero. */
+.pb-svc__clip {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.pb-svc__panel-inner {
+  padding: 0 clamp(1rem, 2.5vw, 2rem) clamp(1.75rem, 3.5vw, 2.5rem);
+  max-width: 68ch;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 300ms var(--pb-ease-out), transform 300ms var(--pb-ease-out);
+}
+
+.pb-svc__row.is-open .pb-svc__panel-inner {
+  opacity: 1;
+  transform: none;
+  transition-delay: 90ms;
+}
+
+.pb-svc__blurb {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  text-wrap: pretty;
+}
+
+.pb-svc__tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 1.75rem;
+  padding: 0;
+}
+
+.pb-svc__row.is-open .pb-tag {
+  border-color: color-mix(in srgb, var(--pb-bg) 40%, transparent);
+  color: color-mix(in srgb, var(--pb-bg) 78%, transparent);
+}
+
+.pb-svc__row.is-open .pb-link {
+  color: var(--pb-bg);
+  border-color: color-mix(in srgb, var(--pb-bg) 45%, transparent);
+}
+
+@media (max-width: 575px) {
+  .pb-svc__trigger {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 0.5rem;
+  }
+  .pb-svc__code {
+    grid-column: 1 / -1;
+  }
+}

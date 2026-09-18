@@ -1,0 +1,107 @@
+.pb-tstm__label {
+  text-align: center;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.pb-tstm__main {
+  margin: 0 auto;
+  max-width: 62rem;
+  text-align: center;
+}
+
+.pb-tstm__main blockquote {
+  margin: 0;
+}
+
+.pb-tstm__quote {
+  font-size: clamp(1.6rem, 4.2vw, 3.4rem);
+  line-height: 1.02;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* El resultado concreto es lo que el cliente vino a buscar: va en rojo */
+.pb-tstm__hl {
+  color: var(--pb-red-display);
+  font-style: normal;
+}
+
+.pb-tstm__by {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  text-align: left;
+}
+
+.pb-tstm__by > span {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.pb-tstm__name {
+  font-size: 1.0625rem;
+}
+
+.pb-tstm__name--sm {
+  font-size: 1rem;
+}
+
+.pb-quote__avatar {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid var(--pb-rule-strong);
+  color: var(--pb-fg-muted);
+}
+
+.pb-quote__avatar .pb-mono {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Secundarios ---------- */
+
+.pb-tstm__more {
+  list-style: none;
+  margin: clamp(3.5rem, 7vw, 6rem) 0 0;
+  padding: clamp(2.5rem, 4vw, 3.5rem) 0 0;
+  border-top: 1px solid var(--pb-rule);
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+@media (min-width: 768px) {
+  .pb-tstm__more {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pb-tstm__more li:first-child {
+    padding-right: clamp(1.5rem, 4vw, 3rem);
+    border-right: 1px solid var(--pb-rule);
+  }
+  .pb-tstm__more li:last-child {
+    padding-left: clamp(1.5rem, 4vw, 3rem);
+  }
+}
+
+.pb-tstm__more figure {
+  margin: 0;
+}
+
+.pb-tstm__more blockquote {
+  margin: 0;
+}
+
+.pb-tstm__small {
+  margin: 0;
+  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.pb-tstm__more .pb-tstm__by {
+  margin-top: 1.5rem;
+}

@@ -1,0 +1,451 @@
+/* ============================================================
+   Pedro Baez — base
+   Tokens de marca mapeados sobre las variables de Bootstrap 5.3.
+   El tema vive en <html data-bs-theme>, así Bootstrap y los
+   componentes propios se mueven juntos.
+   ============================================================ */
+
+:root {
+  /* Marca. Estos tres valores salen del brandbook y no cambian. */
+  --pb-bone: #e4e2dd;
+  --pb-bone-2: #edebe7;
+  --pb-ink: #3a352f;
+  --pb-ink-2: #4a443c;
+  --pb-red: #ff3131;
+
+  /* El rojo de marca no llega a contraste AA como texto chico,
+     así que hay una variante por fondo. El #FF3131 se reserva
+     para superficies, títulos grandes y elementos no textuales. */
+  --pb-red-text: #b81e16;
+  --pb-red-text-inv: #ff7a6e;
+  /* Para texto rojo sobre un bloque pintado con --pb-fg */
+  --pb-red-on-fg: #ff3131;
+  /* Titulares en rojo: sobre fondo claro el rojo de marca se queda a 2.8:1,
+     así que los cuerpos grandes usan una variante apenas más oscura. */
+  --pb-red-display: #f02020;
+  --pb-red-display-inv: #ff3131;
+
+  /* Semánticos: modo claro */
+  --pb-bg: var(--pb-bone);
+  --pb-surface: var(--pb-bone-2);
+  --pb-fg: var(--pb-ink);
+  --pb-fg-muted: #5f594f;
+  --pb-rule: rgba(58, 53, 47, 0.16);
+  --pb-rule-strong: rgba(58, 53, 47, 0.42);
+
+  /* Bloques invertidos (cinta, sobre mí, testimonios, footer) */
+  --pb-inv-bg: var(--pb-ink);
+  --pb-inv-surface: var(--pb-ink-2);
+  --pb-inv-fg: var(--pb-bone);
+  --pb-inv-muted: #bdb4a6;
+  --pb-inv-rule: rgba(228, 226, 221, 0.18);
+  --pb-inv-rule-strong: rgba(228, 226, 221, 0.4);
+
+  /* Movimiento. Curvas fuertes: las de CSS por defecto son flojas. */
+  --pb-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --pb-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --pb-gutter: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+[data-bs-theme='dark'] {
+  --pb-bg: var(--pb-ink);
+  --pb-surface: var(--pb-ink-2);
+  --pb-fg: var(--pb-bone);
+  --pb-fg-muted: #bdb4a6;
+  --pb-rule: rgba(228, 226, 221, 0.18);
+  --pb-rule-strong: rgba(228, 226, 221, 0.4);
+
+  --pb-inv-bg: var(--pb-bone);
+  --pb-inv-surface: var(--pb-bone-2);
+  --pb-inv-fg: var(--pb-ink);
+  --pb-inv-muted: #5f594f;
+  --pb-inv-rule: rgba(58, 53, 47, 0.16);
+  --pb-inv-rule-strong: rgba(58, 53, 47, 0.42);
+
+  --pb-red-text: #ff7a6e;
+  --pb-red-text-inv: #b81e16;
+  --pb-red-on-fg: #c9201a;
+  --pb-red-display: #ff3131;
+  --pb-red-display-inv: #f02020;
+}
+
+/* Bootstrap hereda los tokens de marca */
+:root,
+[data-bs-theme='dark'] {
+  --bs-body-bg: var(--pb-bg);
+  --bs-body-color: var(--pb-fg);
+  --bs-emphasis-color: var(--pb-fg);
+  --bs-secondary-color: var(--pb-fg-muted);
+  --bs-border-color: var(--pb-rule);
+  --bs-primary: var(--pb-red);
+  --bs-link-color: var(--pb-fg);
+  --bs-link-hover-color: var(--pb-red-text);
+  --bs-body-font-family: 'Archivo', system-ui, sans-serif;
+  --bs-body-font-size: 1.0625rem;
+  --bs-body-line-height: 1.6;
+  --bs-border-radius: 0;
+}
+
+/* ---------- Reset y base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Los anclas no quedan tapadas por el nav pegajoso */
+  scroll-padding-top: 6.5rem;
+  /* Sin barra de scroll: decisión estética. El scroll sigue funcionando
+     con rueda, teclado, touch y arrastre, y la página no depende de ella
+     para orientarse porque el nav queda fijo arriba. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+body {
+  margin: 0;
+  background: var(--pb-bg);
+  color: var(--pb-fg);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-variation-settings: 'wdth' 100;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color 400ms var(--pb-ease-out), color 400ms var(--pb-ease-out);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+:focus-visible {
+  outline: 3px solid var(--pb-red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--pb-red);
+  color: #fff;
+}
+
+/* ---------- Tipografía ---------- */
+
+/* Display: Archivo en ancho condensado y peso máximo.
+   Es el gesto que sostiene toda la página. */
+.pb-display {
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-variation-settings: 'wdth' 70, 'wght' 900;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.pb-d1 {
+  font-size: clamp(4rem, 13.5vw, 13rem);
+}
+
+/* Ancho normal, para texto que tiene que llenar el ancho del viewport
+   sin comerse la altura de la pantalla. */
+.pb-display--wide {
+  font-variation-settings: 'wdth' 112, 'wght' 900;
+}
+.pb-d2 {
+  font-size: clamp(2.5rem, 6.4vw, 5.5rem);
+}
+.pb-d3 {
+  font-size: clamp(1.5rem, 3vw, 2.125rem);
+  line-height: 0.95;
+}
+
+/* Utilidad: etiquetas, códigos y metadatos */
+.pb-mono {
+  font-family: 'DM Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.pb-muted {
+  color: var(--pb-fg-muted);
+}
+
+.pb-red {
+  color: var(--pb-red-text);
+}
+
+.pb-lead {
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.55;
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  max-width: 1280px;
+  padding-inline: var(--pb-gutter);
+}
+
+.pb-section {
+  padding-block: clamp(4.5rem, 10vw, 9.5rem);
+  position: relative;
+}
+
+/* Redefinir los tokens en el scope invierte todo lo de adentro
+   sin que cada componente tenga que saber en qué fondo vive. */
+.pb-inverse {
+  --pb-bg: var(--pb-inv-bg);
+  --pb-surface: var(--pb-inv-surface);
+  --pb-fg: var(--pb-inv-fg);
+  --pb-fg-muted: var(--pb-inv-muted);
+  --pb-rule: var(--pb-inv-rule);
+  --pb-rule-strong: var(--pb-inv-rule-strong);
+  --pb-red-text: var(--pb-red-text-inv);
+  --pb-red-display: var(--pb-red-display-inv);
+  background: var(--pb-bg);
+  color: var(--pb-fg);
+  transition: background-color 400ms var(--pb-ease-out), color 400ms var(--pb-ease-out);
+}
+
+/* Encabezado de sección: etiqueta arriba, título grande, bajada al costado */
+.pb-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+@media (min-width: 992px) {
+  .pb-head {
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  }
+}
+
+.pb-head__label {
+  color: var(--pb-fg-muted);
+  margin-bottom: 1.25rem;
+}
+
+.pb-rule {
+  border: 0;
+  border-top: 1px solid var(--pb-rule);
+  margin: 0;
+  opacity: 1;
+}
+
+/* ---------- Botones ---------- */
+
+.pb-btn {
+  --pb-btn-bg: transparent;
+  --pb-btn-fg: var(--pb-fg);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.75rem;
+  border: 1px solid var(--pb-rule-strong);
+  border-radius: 999px;
+  background: var(--pb-btn-bg);
+  color: var(--pb-btn-fg);
+  font-family: 'Archivo', sans-serif;
+  /* 19px bold: entra en "texto grande" de WCAG, que es lo que
+     permite usar el rojo de marca como fondo con texto claro. */
+  font-size: 1.1875rem;
+  font-weight: 700;
+  font-variation-settings: 'wdth' 85, 'wght' 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 160ms var(--pb-ease-out), background-color 200ms ease,
+    color 200ms ease, border-color 200ms ease;
+}
+
+.pb-btn:active {
+  transform: scale(0.97);
+}
+
+.pb-btn--red {
+  --pb-btn-bg: var(--pb-red);
+  --pb-btn-fg: #fff;
+  border-color: var(--pb-red);
+}
+
+.pb-btn--solid {
+  --pb-btn-bg: var(--pb-fg);
+  --pb-btn-fg: var(--pb-bg);
+  border-color: var(--pb-fg);
+}
+
+.pb-btn--block {
+  width: 100%;
+  justify-content: center;
+  border-radius: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pb-btn:hover {
+    --pb-btn-bg: var(--pb-fg);
+    --pb-btn-fg: var(--pb-bg);
+    border-color: var(--pb-fg);
+  }
+  .pb-btn--red:hover {
+    --pb-btn-bg: var(--pb-fg);
+    --pb-btn-fg: var(--pb-bg);
+  }
+  .pb-btn--solid:hover {
+    --pb-btn-bg: var(--pb-red);
+    --pb-btn-fg: #fff;
+    border-color: var(--pb-red);
+  }
+}
+
+/* Enlace de texto con flecha */
+.pb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--pb-fg);
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--pb-rule-strong);
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.pb-link svg {
+  transition: transform 220ms var(--pb-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pb-link:hover {
+    color: var(--pb-red-text);
+    border-color: var(--pb-red-text);
+  }
+  .pb-link:hover svg {
+    transform: translate(3px, -3px);
+  }
+}
+
+/* Píldora de etiqueta */
+.pb-tag {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--pb-rule-strong);
+  border-radius: 999px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--pb-fg-muted);
+}
+
+/* ---------- El logo ---------- */
+.pb-logo {
+  display: block;
+  width: auto;
+}
+
+/* ---------- Aparición al hacer scroll ---------- */
+
+/* Aparición al entrar en pantalla. El marcador es un atributo y no una
+   clase: React reescribe className al re-renderizar y borraba la clase,
+   con lo que las filas del acordeón desaparecían al abrirlas. */
+.pb-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 700ms var(--pb-ease-out), transform 700ms var(--pb-ease-out);
+}
+
+.pb-reveal[data-in] {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ---------- Accesibilidad ---------- */
+
+.pb-skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  background: var(--pb-red);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.pb-skip:focus {
+  left: 0;
+}
+
+ /* Texto sólo para lectores de pantalla. Lo traía el bundle completo de
+    Bootstrap; al dejar sólo reboot y grid dejó de existir y los rótulos
+    ocultos se volvieron visibles. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  /* Sin movimiento, pero el contenido tiene que verse igual */
+  .pb-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,41 @@
+.pb-media {
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--ratio, 16 / 10);
+  object-fit: cover;
+  background: var(--pb-surface);
+}
+
+/* Marcador: se lee como una instrucción, no como un error */
+.pb-media--empty {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px dashed var(--pb-rule-strong);
+  color: var(--pb-fg);
+}
+
+.pb-media__mark {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 1px solid var(--pb-rule-strong);
+  color: var(--pb-red-text);
+}
+
+.pb-media__label {
+  max-width: 34ch;
+  margin: 0;
+}
+
+.pb-media__note {
+  margin: 0;
+  color: var(--pb-fg-muted);
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
