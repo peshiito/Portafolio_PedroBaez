@@ -92,6 +92,35 @@ cp .env.example .env     # y completá las variables
 vercel dev
 ```
 
+## Cómo se ve al compartir el link
+
+Al pegar el link en WhatsApp, Instagram, LinkedIn o Google aparece una tarjeta
+con título, descripción e imagen. La home usa `public/og.png` y **cada proyecto
+usa su propia captura**.
+
+Hay un detalle que explica por qué esto no es sólo poner unos meta tags: los
+lectores de enlaces **no ejecutan JavaScript**. Como el sitio es una SPA, todas
+las rutas servirían el mismo `index.html` y al compartir un proyecto se vería
+la tarjeta de la home. Por eso `npm run build` corre después
+`scripts/prerender.mjs`, que escribe un HTML por proyecto con sus meta ya
+puestos. La aplicación sigue funcionando igual.
+
+Las imágenes de las tarjetas van en **JPG de 1200×630**, no en WebP: algunos
+lectores de enlaces todavía no muestran WebP.
+
+Para regenerarlas:
+
+```bash
+node scripts/generar-og.mjs    # la tarjeta de la home (necesita el sitio en :5173)
+npm run build                  # el resto, incluido el prerenderizado
+```
+
+## Antes de publicar
+
+`public/sitemap.xml` lista la home y cada proyecto. Cuando agregues o saques
+proyectos de `src/data/projects.js`, regeneralo y actualizá el dominio si
+cambió (también en `index.html`, `src/hooks/useMeta.js` y `scripts/prerender.mjs`).
+
 ## Despliegue
 
 Es una SPA con rutas propias, así que el hosting tiene que devolver

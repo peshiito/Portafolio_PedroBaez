@@ -7,8 +7,13 @@ import { useEffect } from 'react'
  * className en cada re-renderizado (por ejemplo al abrir una fila del
  * acordeón) y borraba la clase, dejando el elemento en opacity 0. React no
  * toca atributos que no le pasamos, así que data-in sobrevive.
+ *
+ * `clave` es el contenido que se está mostrando. Cuando cambia, el observer
+ * se rehace y toma los elementos nuevos: al pasar de un proyecto a otro la
+ * ruta es la misma y React reutiliza el componente, así que sin esto los
+ * elementos recién montados nunca se observaban y quedaban invisibles.
  */
-export function useReveal() {
+export function useReveal(clave) {
   useEffect(() => {
     const els = document.querySelectorAll('.pb-reveal:not([data-in])')
     if (!els.length) return
@@ -31,5 +36,5 @@ export function useReveal() {
 
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
-  }, [])
+  }, [clave])
 }

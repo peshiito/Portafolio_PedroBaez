@@ -1,56 +1,63 @@
 import { useEffect } from 'react'
 
-const SITE = 'https://pedrobaez.ar'
+const SITIO = 'https://portafoliopedrobaez.vercel.app'
+const IMAGEN_POR_DEFECTO = '/og.png'
 
-function tag(selector, create) {
+function etiqueta(selector, crear) {
   let el = document.head.querySelector(selector)
   if (!el) {
-    el = create()
+    el = crear()
     document.head.appendChild(el)
   }
   return el
 }
 
+const meta = (attr, valor) =>
+  etiqueta(`meta[${attr}="${valor}"]`, () => {
+    const e = document.createElement('meta')
+    e.setAttribute(attr.replace('[', '').replace(']', ''), valor)
+    return e
+  })
+
+const absoluta = (ruta) => (ruta?.startsWith('http') ? ruta : SITIO + (ruta || IMAGEN_POR_DEFECTO))
+
 /**
- * Título, descripción y canonical por página. Al ser una SPA, esto sólo
- * corrige lo que ve el visitante y los crawlers que ejecutan JS; si el SEO
- * pasa a importar de verdad, el paso siguiente es prerenderizar.
+ * Título, descripción, canonical y tarjeta para compartir, por página.
+ *
+ * Al ser una SPA esto corrige lo que ven el visitante y los buscadores que
+ * ejecutan JavaScript. WhatsApp y las redes leen el HTML sin ejecutarlo, así
+ * que para ellos vale lo que está en index.html: por eso ahí ya están puestos
+ * los valores de la home. Si el SEO pasa a importar de verdad, el paso
+ * siguiente es prerenderizar.
  */
-export function useMeta({ title, description, path }) {
+export function useMeta({ title, description, path, image, tipo = 'website' }) {
   useEffect(() => {
-    if (title) document.title = title
+    if (title) {
+      document.title = title
+      meta('property', 'og:title').setAttribute('content', title)
+      meta('name', 'twitter:title').setAttribute('content', title)
+    }
 
     if (description) {
-      const m = tag('meta[name="description"]', () => {
-        const e = document.createElement('meta')
-        e.setAttribute('name', 'description')
-        return e
-      })
-      m.setAttribute('content', description)
+      meta('name', 'description').setAttribute('content', description)
+      meta('property', 'og:description').setAttribute('content', description)
+      meta('name', 'twitter:description').setAttribute('content', description)
     }
 
     if (path) {
-      const c = tag('link[rel="canonical"]', () => {
+      const url = SITIO + path
+      etiqueta('link[rel="canonical"]', () => {
         const e = document.createElement('link')
         e.setAttribute('rel', 'canonical')
         return e
-      })
-      c.setAttribute('href', SITE + path)
+      }).setAttribute('href', url)
+      meta('property', 'og:url').setAttribute('content', url)
     }
 
-    const og = [
-      ['og:title', title],
-      ['og:description', description],
-      ['og:url', path ? SITE + path : null],
-    ]
-    og.forEach(([prop, val]) => {
-      if (!val) return
-      const e = tag(`meta[property="${prop}"]`, () => {
-        const n = document.createElement('meta')
-        n.setAttribute('property', prop)
-        return n
-      })
-      e.setAttribute('content', val)
-    })
-  }, [title, description, path])
+    // Cada proyecto se comparte con su propia captura, no con la genérica
+    const img = absoluta(image)
+    meta('property', 'og:image').setAttribute('content', img)
+    meta('name', 'twitter:image').setAttribute('content', img)
+    meta('property', 'og:type').setAttribute('content', tipo)
+  }, [title, description, path, image, tipo])
 }

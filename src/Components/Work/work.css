@@ -84,7 +84,7 @@
 .pb-work__desc {
   display: block;
   margin-top: 0.5rem;
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
 }
 
 @media (hover: hover) and (pointer: fine) {

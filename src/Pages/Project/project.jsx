@@ -11,13 +11,16 @@ import './project.css'
 function Project() {
   const { slug } = useParams()
   const p = getProject(slug)
-  useReveal()
+  useReveal(slug)
   useMeta(
     p
       ? {
           title: `${p.name} — ${p.what} | Pedro Baez`,
           description: p.resumen,
           path: `/proyectos/${p.slug}`,
+          // Al compartir un proyecto se ve su captura, no la tarjeta genérica
+          image: `/proyectos/${p.slug}-og.jpg`,
+          tipo: 'article',
         }
       : {},
   )

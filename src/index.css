@@ -82,7 +82,7 @@
   --bs-link-color: var(--pb-fg);
   --bs-link-hover-color: var(--pb-red-text);
   --bs-body-font-family: 'Archivo', system-ui, sans-serif;
-  --bs-body-font-size: 1.0625rem;
+  --bs-body-font-size: 1.125rem;
   --bs-body-line-height: 1.6;
   --bs-border-radius: 0;
 }
@@ -118,7 +118,7 @@ body {
   color: var(--pb-fg);
   font-family: 'Archivo', system-ui, sans-serif;
   font-variation-settings: 'wdth' 100;
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -177,7 +177,7 @@ img {
 /* Utilidad: etiquetas, códigos y metadatos */
 .pb-mono {
   font-family: 'DM Mono', ui-monospace, monospace;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -194,7 +194,7 @@ img {
 }
 
 .pb-lead {
-  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  font-size: clamp(1.125rem, 1.5vw, 1.3125rem);
   line-height: 1.55;
   max-width: 46ch;
   margin: 0;
@@ -359,7 +359,7 @@ img {
   border: 1px solid var(--pb-rule-strong);
   border-radius: 999px;
   font-family: 'DM Mono', monospace;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--pb-fg-muted);

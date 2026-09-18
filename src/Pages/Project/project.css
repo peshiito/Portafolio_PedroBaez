@@ -79,7 +79,7 @@
 
 .pb-proj__ficha-v {
   margin: 0;
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
 }
 
 .pb-proj__site {
@@ -120,7 +120,8 @@
 
 .pb-proj__texto {
   margin: 0;
-  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
+  line-height: 1.6;
   color: var(--pb-fg-muted);
   text-wrap: pretty;
 }

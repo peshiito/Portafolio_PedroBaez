@@ -141,6 +141,25 @@
   line-height: 0.8;
 }
 
+/* En pantallas chicas, tres columnas dejan los rótulos partidos en tres
+   líneas y con alturas distintas. Apilados se leen de un vistazo. */
+@media (max-width: 575px) {
+  .pb-hero__stats {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .pb-hero__stats li {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0 0.9rem;
+  }
+
+  .pb-hero__stat-n {
+    font-size: 2.25rem;
+  }
+}
+
 @keyframes pb-fade-up {
   from {
     opacity: 0;

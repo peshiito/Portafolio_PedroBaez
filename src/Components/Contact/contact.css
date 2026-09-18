@@ -103,7 +103,7 @@
   padding: 0.65rem 0;
   color: var(--pb-fg);
   font-family: 'Archivo', sans-serif;
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   transition: border-color 220ms ease;
 }
 
@@ -145,7 +145,7 @@
 
 .pb-field__error {
   margin: 0.5rem 0 0;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--pb-red-text);
 }
 

@@ -34,8 +34,8 @@
 }
 
 .pb-cmp__txt {
-  font-size: clamp(1rem, 1.35vw, 1.1875rem);
-  line-height: 1.4;
+  font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
+  line-height: 1.5;
   text-wrap: pretty;
 }
 

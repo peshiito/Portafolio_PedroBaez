@@ -97,8 +97,8 @@
 
 .pb-tstm__small {
   margin: 0;
-  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
-  line-height: 1.45;
+  font-size: clamp(1.125rem, 1.7vw, 1.3125rem);
+  line-height: 1.55;
   text-wrap: pretty;
 }
 

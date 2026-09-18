@@ -59,11 +59,15 @@ marca pasa con 3,66.
 | rol | familia | ajustes |
 |---|---|---|
 | Display | Archivo | `wdth` 68–75, weight 800–900, uppercase, tracking `-0.02em`, leading `0.88` |
-| Cuerpo | Archivo | `wdth` 100, weight 400, 17px, leading `1.6` |
-| Utilidad | DM Mono | 11px, uppercase, tracking `0.12em` |
+| Cuerpo | Archivo | `wdth` 100, weight 400, 18px, leading `1.6` |
+| Utilidad | DM Mono | 12px, uppercase, tracking `0.12em` |
 
 Escala: hero `clamp(64px, 14vw, 200px)` · h2 `clamp(40px, 7vw, 96px)` ·
-h3 `30px` · cuerpo `17px` · mono `11px`.
+h3 `30px` · cuerpo `18px` · bajadas `18–21px` · mono `12px`.
+
+El cuerpo arrancó en 17px, con descripciones en 15px y etiquetas en 11px, y se
+leía apretado. Los títulos no se tocaron: el problema era sólo el texto que
+explica.
 
 Archivo condensada en peso Black da el efecto del ejemplo 3 sin usar Anton ni
 Bebas Neue, que están en todos los portafolios.
@@ -175,6 +179,15 @@ atributos que no le pasamos, así que `data-in` sobrevive a los re-renderizados.
 Regla general: **no mezclar manipulación directa del DOM con propiedades que
 React administra.**
 
+El mismo `data-in` trajo un segundo problema, más difícil de ver: al pasar de un
+proyecto al siguiente la ruta no cambia —es la misma `/proyectos/:slug`, sólo
+cambia el parámetro—, así que **React reutiliza el componente en vez de
+montarlo de nuevo**. El observer corría con `[]`, nunca volvía a ejecutarse, y
+las imágenes recién montadas jamás se observaban: quedaban en `opacity: 0` y
+sólo aparecían al recargar con F5. Se arregló por los dos lados: el hook toma
+una `clave` (el slug) como dependencia, y la ruta monta la página con
+`key={slug}` para que no arrastre estado de la anterior.
+
 El panel cerrado del acordeón colapsa con `grid-template-rows: 0fr`, y por eso
 el ítem de la grilla (`.pb-svc__clip`) no lleva padding propio: si lo llevara,
 el panel cerrado conservaría ese alto en vez de llegar a cero.
@@ -211,6 +224,15 @@ encima del de enviar, los dos en rojo.
 
 El envío lo resuelve una función de Vercel (`api/contacto.js`), no un servidor
 propio: el detalle está en el README.
+
+## Listo para producción
+
+- `public/robots.txt` y `public/sitemap.xml` (se regenera con el script del
+  README cuando agregues proyectos).
+- Sin `console.log` en el bundle.
+- El teléfono y el correo no viajan en texto plano (ver README).
+- Las herramientas de desarrollo (`scripts/`) quedan en el repo a propósito:
+  son las que verifican accesibilidad, interacción y capturas.
 
 ## Pendientes
 
