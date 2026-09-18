@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../Logo/logo'
 import SectionLink from '../SectionLink'
+import { linkWhatsApp } from '../../data/contacto'
 import { Sun, Moon, ArrowUpRight } from '../Logo/icons'
 import { useTheme } from '../../hooks/useTheme'
 import './navbar.css'
@@ -40,8 +41,13 @@ function Navbar() {
             <span className="pb-utility__dot" aria-hidden="true" />
             Disponible para proyectos — marzo 2026
           </p>
-          <a className="pb-mono pb-utility__mail" href="mailto:hola@pedrobaez.ar">
-            hola@pedrobaez.ar
+          <a
+            className="pb-mono pb-utility__mail"
+            href={linkWhatsApp('Hola Pedro, vi tu portafolio y quiero hacerte una consulta.')}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Escribime por WhatsApp
           </a>
         </div>
       </div>

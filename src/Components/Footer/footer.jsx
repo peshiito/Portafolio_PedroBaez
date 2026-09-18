@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Logo from '../Logo/logo'
 import SectionLink from '../SectionLink'
+import { linkWhatsApp } from '../../data/contacto'
 import './footer.css'
 
 const COLUMNS = [
@@ -16,8 +17,8 @@ const COLUMNS = [
   {
     title: 'Contacto',
     links: [
-      { label: 'Email', href: 'mailto:hola@pedrobaez.ar' },
-      { label: 'WhatsApp', href: 'https://wa.me/5491155555555' },
+      { label: 'Escribime', id: 'contacto' },
+      { label: 'WhatsApp', href: linkWhatsApp(), externo: true },
       { label: 'Instagram', href: '#' },
       { label: 'LinkedIn', href: '#' },
     ],
@@ -54,7 +55,11 @@ function Footer() {
                       </li>
                     ) : (
                       <li key={l.label}>
-                        <a className="pb-mono pb-footer__link" href={l.href}>
+                        <a
+                          className="pb-mono pb-footer__link"
+                          href={l.href}
+                          {...(l.externo ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+                        >
                           {l.label}
                         </a>
                       </li>

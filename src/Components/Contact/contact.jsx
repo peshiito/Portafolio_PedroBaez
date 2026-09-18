@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Mail, Phone, Pin, ArrowUpRight } from '../Logo/icons'
 import { WhatsAppIcon } from '../Logo/whatsapp'
-import { CONTACTO, linkWhatsApp } from '../../data/contacto'
+import { CONTACTO, linkWhatsApp, telefonoVisible } from '../../data/contacto'
 import './contact.css'
 
 const NEEDS = [
@@ -97,14 +97,16 @@ function Contact() {
           </div>
 
           <ul className="pb-contact__channels">
-            <li>
-              <Mail />
-              <a href={`mailto:${CONTACTO.email}`}>{CONTACTO.email}</a>
-            </li>
+            {CONTACTO.email && (
+              <li>
+                <Mail />
+                <a href={`mailto:${CONTACTO.email}`}>{CONTACTO.email}</a>
+              </li>
+            )}
             <li>
               <Phone />
               <a href={linkWhatsApp()} target="_blank" rel="noreferrer noopener">
-                {CONTACTO.whatsappVisible}
+                {telefonoVisible()}
               </a>
             </li>
             <li>

@@ -4,36 +4,53 @@ Ordenado por urgencia. Todo lo demás ya está funcionando.
 
 ---
 
-## 1. Para que el formulario envíe
+## 1. Cargar las variables en Vercel  ⚠️ FALTA
 
-No van al repo: se cargan en **Vercel → Project Settings → Environment Variables**.
+El formulario ya está **probado y funcionando** (envío real confirmado). Sólo
+falta repetir la configuración en Vercel, porque hoy vive en el `.env` local,
+que no se sube al repo.
 
-| Variable | Qué es | De dónde sale |
-|---|---|---|
-| `RESEND_API_KEY` | La clave que permite mandar mails | Cuenta gratis en [resend.com](https://resend.com) → API Keys → Create |
-| `CONTACTO_DESTINO` | La casilla donde querés recibir las consultas | Tu correo de verdad |
+En **Vercel → Project Settings → Environment Variables**:
 
-> **Ojo con esto:** con el remitente de prueba de Resend sólo vas a recibir en la
-> casilla con la que te registraste. Para que el mail salga desde tu dominio hay
-> que verificarlo en Resend (cargar unos registros DNS) y después setear
-> `CONTACTO_REMITENTE`.
+| Variable | Valor |
+|---|---|
+| `RESEND_API_KEY` | Tu clave de Resend |
+| `CONTACTO_DESTINO` | `pedrogbaez1@gmail.com` |
+| `CONTACTO_REMITENTE` | `Portafolio <onboarding@resend.dev>` |
 
-Mientras tanto el formulario no rompe: si falla, ofrece WhatsApp.
+> **Rotá la clave.** La que está en uso pasó por un chat. En Resend → API Keys,
+> borrala, creá otra y pegá la nueva directamente en Vercel.
+
+> **Sobre el remitente:** con el de prueba sólo llegan mails a la casilla de tu
+> cuenta de Resend. Para que salgan desde tu dominio hay que verificarlo ahí
+> (unos registros DNS) y recién entonces cambiar `CONTACTO_REMITENTE`.
+
+Si el envío falla por lo que sea, el formulario ofrece WhatsApp.
 
 ---
 
-## 2. Datos de contacto reales
+## 2. Contacto  ✅ LISTO
 
-**Archivo:** `src/data/contacto.js`
+Tu WhatsApp (`+54 9 11 2530-3909`) ya está cargado, y **no viaja en texto
+plano**: en `src/data/contacto.js` está invertido y codificado, y se arma recién
+en el navegador. Verificado sobre el build: el número no aparece en ningún
+archivo, ni en el HTML ni en los `.js`.
 
-| Campo | Ahora (inventado) | Qué poner |
-|---|---|---|
-| `email` | `hola@pedrobaez.ar` | Tu correo |
-| `whatsapp` | `5491155555555` | Tu número, formato internacional sin `+` ni espacios |
-| `whatsappVisible` | `+54 9 11 5555 5555` | El mismo, como querés que se lea |
-| `ciudad` | `Buenos Aires, Argentina` | Si es otra |
+Para cambiarlo más adelante:
 
-El número se usa en el botón de contacto, en el flotante y en el pie.
+```bash
+node scripts/codificar-contacto.mjs 5491125303909 "+54 9 11 2530-3909"
+```
+
+y pegás las dos constantes que imprime.
+
+**El correo no se muestra, a propósito.** Las consultas entran por el formulario
+(que las manda a `CONTACTO_DESTINO`) o por WhatsApp. Si algún día querés
+mostrarlo, poné la dirección en `email` de ese mismo archivo y aparece sola.
+
+> **Hasta dónde llega esto:** frena la recolección automática, que es de donde
+> viene casi todo el spam. A alguien que se siente a mirar el código no lo
+> frena, y no puede: el número tiene que poder marcarse.
 
 ---
 
@@ -66,7 +83,7 @@ proyectos reales. Tres opciones:
 
 **Archivo:** `src/Components/Footer/footer.jsx` — hoy apuntan a `#`
 
-- Instagram y LinkedIn → tus perfiles
+- Instagram y LinkedIn → tus perfiles (los completás vos)
 - Términos y Privacidad → hay que escribirlos, o sacarlos del pie
 
 ---
