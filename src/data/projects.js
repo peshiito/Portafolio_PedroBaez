@@ -10,12 +10,144 @@
  * - `testimonio` queda en null a propósito. Cuando tengas uno real, se
  *   completa y aparece solo.
  * - Para sumar un video, poné el MP4 en `public/proyectos/` y apuntá `video`.
+ * - `tarjeta` es opcional: la imagen de la grilla de trabajos, si tiene que
+ *   ser otra que la portada del caso.
  * - `bloques` es opcional: cada uno abre una sección propia con su título, su
  *   texto y su galería. Sirve para contar por separado partes de un proyecto
  *   que no se explican con las mismas capturas (por ejemplo, un panel interno).
  */
 
 export const PROJECTS = [
+  {
+    slug: 'comanda',
+    name: 'Comanda',
+    year: '2026',
+    kind: 'Restaurante',
+    what: 'Sistema de salón, cocina y caja',
+    sitio: null,
+    lugar: 'Proyecto propio',
+    rol: 'Diseño, frontend, backend, base de datos y pruebas de seguridad',
+    duracion: 'Proyecto propio',
+    stack: ['React', 'Vite', 'Node', 'Express', 'TypeScript', 'MySQL', 'Socket.IO', 'Docker'],
+
+    resumen:
+      'El sistema con el que un restaurante trabaja todos los días: el mozo toma el pedido en su celular, la comanda llega sola a la pantalla de cocina y la caja cobra, factura y cierra el turno con el arqueo cuadrado.',
+    desafio:
+      'En un restaurante el pedido pasa por demasiadas manos: el mozo lo anota en papel, alguien lo lleva a la cocina, la cocina no sabe qué mesa espera hace más tiempo y a la noche la caja no cierra con lo que dice el cajón. Y si el sistema depende de internet, un corte un viernes a las nueve deja al local sin poder cobrar.',
+    solucion:
+      'Cada puesto tiene su pantalla. El mozo ve el salón ordenado por urgencia y arma una libreta sin precios que pasa a caja. Caja la revisa y es la única que manda a cocina. La cocina recibe la comanda al instante, con reloj y semáforo de demora, y tiene un solo botón: Terminada. Todo corre en un servidor dentro del local, así que si se corta internet se sigue tomando pedidos y cobrando.',
+    entregables: [
+      'Salón con plano real de las mesas, unión de mesas y take away',
+      'Libreta del mozo desde el celular, entrando con PIN',
+      'Pantalla de cocina en tiempo real con semáforo de demora',
+      'Caja con pago mixto, propina, descuentos y cobro a prueba de doble toque',
+      'Ticket y factura, con la integración a ARCA preparada',
+      'Arqueo por medio de pago y cierre de turno',
+      'Reportes, auditoría y carta con variantes y modificadores',
+      'Editor del plano del salón para el encargado',
+    ],
+    datos: [
+      { n: '4', label: 'Puestos: mozo, cocina, caja y encargado' },
+      { n: '24', label: 'Tablas en la base' },
+      { n: '63/63', label: 'Pruebas de seguridad superadas' },
+    ],
+    testimonio: null,
+    portada: '/proyectos/comanda-portada.webp',
+    tarjeta: '/proyectos/comanda-tarjeta.webp',
+    video: null,
+    galeria: [
+      {
+        src: '/proyectos/comanda-1.webp',
+        alt: 'Plano del salón con cada mesa en su lugar, su estado, lo que lleva consumido y las mesas unidas',
+      },
+      {
+        src: '/proyectos/comanda-2.webp',
+        alt: 'Cuenta abierta de una mesa en caja, con el detalle de lo pedido y el botón para cobrar',
+      },
+      {
+        src: '/proyectos/comanda-3.webp',
+        alt: 'Bandeja de caja con los pedidos por revisar, las mesas que piden la cuenta y las cuentas abiertas',
+      },
+      { src: '/proyectos/comanda-movil.webp', alt: 'El salón en el celular del mozo, ordenado por urgencia' },
+    ],
+    bloques: [
+      {
+        titulo: 'Un pedido, de la mesa a la caja',
+        texto:
+          'El pedido se escribe una sola vez, en la mesa y por quien lo escuchó. Después viaja: de la libreta del mozo a la caja, de la caja a la cocina, de la cocina de vuelta al salón cuando el plato está listo. Las bebidas no pasan por cocina: el mozo las saca de la heladera y entran a la cuenta ya entregadas.',
+        galeria: [
+          {
+            src: '/proyectos/comanda-mesa.webp',
+            alt: 'Una mesa en servicio, con su cuenta abierta y la libreta para anotar lo que se pide',
+          },
+          {
+            src: '/proyectos/comanda-entrar.webp',
+            alt: 'Pantalla de entrada: el salón y la cocina entran con PIN, la caja y el encargado con contraseña',
+          },
+          {
+            src: '/proyectos/comanda-mesa-movil.webp',
+            alt: 'La libreta del mozo en el celular, sin precios y con la forma de pago prevista',
+          },
+        ],
+      },
+      {
+        titulo: 'Lo que ve el dueño',
+        texto:
+          'El encargado arma la carta, acomoda las mesas del plano arrastrándolas y da de alta al personal. A la noche ve cuánto se vendió, por qué medio entró la plata y cuánto tendría que haber en el cajón. Y cualquier cosa que se anuló, se devolvió o no se cobró queda registrada con motivo, autor y la firma del encargado.',
+        galeria: [
+          {
+            src: '/proyectos/comanda-reportes.webp',
+            alt: 'Reportes del día con venta, ticket promedio, gasto por comensal, propinas y medios de pago',
+          },
+          {
+            src: '/proyectos/comanda-arqueo.webp',
+            alt: 'Arqueo de caja con el efectivo esperado y la plata separada por medio de pago',
+          },
+          {
+            src: '/proyectos/comanda-plano.webp',
+            alt: 'Editor del plano del salón con una mesa elegida y sus medidas en vivo',
+          },
+          {
+            src: '/proyectos/comanda-auditoria.webp',
+            alt: 'Auditoría con las acciones sensibles del turno, quién las hizo y por qué',
+          },
+          {
+            src: '/proyectos/comanda-carta.webp',
+            alt: 'Carta del local con precios, modificadores y productos agotados',
+          },
+          {
+            src: '/proyectos/comanda-empleados.webp',
+            alt: 'Empleados del local con su puesto y su forma de entrar',
+          },
+        ],
+      },
+      {
+        titulo: 'Las reglas que lo hacen confiable',
+        texto:
+          'Un sistema de caja de juguete y uno que un contador puede auditar se diferencian en estas decisiones. Ninguna se ve en pantalla, pero son las que hacen que la plata cierre.',
+        galeria: [],
+        lista: [
+          {
+            k: 'Nada se borra',
+            v: 'Una venta que no se cobró se cierra como pérdida, con motivo, autor y PIN del encargado. El registro de lo que pasó no se puede editar.',
+          },
+          {
+            k: 'Precio congelado',
+            v: 'Cada plato guarda el precio del momento en que se pidió. Si mañana sube la milanesa, la cuenta de ayer no cambia.',
+          },
+          {
+            k: 'Un cobro es un cobro',
+            v: 'Dos toques seguidos al botón de cobrar no cobran dos veces, y una cuenta puede pagarse en partes y con varios medios.',
+          },
+          {
+            k: 'Funciona sin internet',
+            v: 'El servidor vive en el local. Si se corta la conexión, el salón, la cocina y la caja siguen andando; lo que necesita afuera, como la factura electrónica, queda en cola.',
+          },
+        ],
+      },
+    ],
+  },
+
   {
     slug: 'oficio-barberia',
     name: 'Oficio Barbería',
@@ -50,6 +182,7 @@ export const PROJECTS = [
     ],
     testimonio: null,
     portada: '/proyectos/barberia-portada.webp',
+    tarjeta: '/proyectos/barberia-tarjeta.webp',
     video: null,
     galeria: [
       { src: '/proyectos/barberia-1.webp', alt: 'Lista de precios y servicios de Oficio Barbería' },
@@ -148,6 +281,7 @@ export const PROJECTS = [
     ],
     testimonio: null,
     portada: '/proyectos/chatbot-portada.webp',
+    tarjeta: '/proyectos/hardstore-tarjeta.webp',
     video: null,
     galeria: [
       { src: '/proyectos/chatbot-1.webp', alt: 'El asesor respondiendo con tarjetas de producto reales' },
@@ -189,6 +323,7 @@ export const PROJECTS = [
     ],
     testimonio: null,
     portada: '/proyectos/gimnasio-portada.webp',
+    tarjeta: '/proyectos/gimnasio-tarjeta.webp',
     video: null,
     galeria: [
       { src: '/proyectos/gimnasio-1.webp', alt: 'Sección de disciplinas del gimnasio' },
@@ -230,6 +365,7 @@ export const PROJECTS = [
     ],
     testimonio: null,
     portada: '/proyectos/iphone-portada.webp',
+    tarjeta: '/proyectos/iphone-tarjeta.webp',
     video: null,
     galeria: [
       { src: '/proyectos/iphone-1.webp', alt: 'Catálogo de equipos y servicios de iTech Solutions' },
@@ -271,6 +407,7 @@ export const PROJECTS = [
     ],
     testimonio: null,
     portada: '/proyectos/veterinaria-portada.webp',
+    tarjeta: '/proyectos/veterinaria-tarjeta.webp',
     video: null,
     galeria: [
       { src: '/proyectos/veterinaria-1.webp', alt: 'Servicios de la veterinaria' },

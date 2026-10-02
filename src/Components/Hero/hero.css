@@ -33,31 +33,13 @@
   animation-delay: 80ms;
 }
 
-/* El retrato entra en la línea del titular: presenta a la persona sin
+/* El avatar entra en la línea del titular: presenta a la persona sin
    robarle protagonismo al nombre. */
 .pb-hero__avatar {
-  display: grid;
-  place-items: center;
+  display: block;
   flex: none;
-  width: clamp(56px, 8vw, 88px);
-  height: clamp(56px, 8vw, 88px);
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--pb-surface);
-  border: 1px solid var(--pb-rule-strong);
-  color: var(--pb-fg-muted);
-}
-
-.pb-hero__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
-}
-
-.pb-hero__avatar .pb-mono {
-  font-size: clamp(0.8rem, 1.6vw, 1.05rem);
-  letter-spacing: 0.08em;
+  width: clamp(76px, 10vw, 128px);
+  height: clamp(76px, 10vw, 128px);
 }
 
 .pb-hero__title {

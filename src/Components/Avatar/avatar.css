@@ -1,0 +1,120 @@
+/* Los colores del dibujo no cambian con el tema: el fondo del círculo es
+   siempre claro, así el personaje se lee igual sobre secciones claras y
+   oscuras. */
+.pb-av {
+  --av-fondo: #f3f1ec;
+  --av-tinta: #3a352f;
+  --av-piel: #e8b48c;
+  --av-pelo: #2e2924;
+  --av-rojo: #ff3131;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.pb-av__fondo { fill: var(--av-fondo); }
+.pb-av__borde { fill: none; stroke: var(--av-tinta); stroke-width: 2.5; }
+.pb-av__piel { fill: var(--av-piel); }
+.pb-av__pelo { fill: var(--av-pelo); }
+.pb-av__remera { fill: var(--av-rojo); }
+.pb-av__cachete { fill: var(--av-rojo); opacity: 0.22; }
+.pb-av__ojo { fill: var(--av-tinta); }
+
+.pb-av__cuello,
+.pb-av__ceja,
+.pb-av__boca,
+.pb-av__dedos,
+.pb-av__indice {
+  fill: none;
+  stroke: var(--av-tinta);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pb-av__dedos { stroke: var(--av-piel); stroke-width: 5; }
+.pb-av__indice { stroke: var(--av-piel); stroke-width: 5.5; }
+.pb-av__cuello { stroke: rgba(0, 0, 0, 0.25); stroke-width: 2; }
+
+.pb-av__manga {
+  fill: none;
+  stroke: var(--av-rojo);
+  stroke-width: 15;
+  stroke-linecap: round;
+}
+
+/* Brazos: entran desde el hombro */
+.pb-av__brazo {
+  opacity: 0;
+  transform: rotate(-24deg) scale(0.9);
+  transform-box: view-box;
+  transition: opacity 180ms ease, transform 420ms var(--pb-ease-out);
+}
+.pb-av__brazo--saluda { transform-origin: 116px 136px; }
+.pb-av__brazo--senala { transform-origin: 114px 136px; transform: rotate(30deg) scale(0.9); }
+.pb-av__brazo--piensa { transform-origin: 46px 150px; transform: translateY(40px); }
+
+.pb-av--saluda .pb-av__brazo--saluda,
+.pb-av--senala .pb-av__brazo--senala,
+.pb-av--piensa .pb-av__brazo--piensa {
+  opacity: 1;
+  transform: none;
+}
+
+/* El saludo: tres vaivenes de la mano y queda quieta */
+.pb-av__mano-saluda {
+  transform-box: view-box;
+  transform-origin: 136px 86px;
+}
+.pb-av--saluda .pb-av__mano-saluda {
+  animation: pb-av-saludo 1100ms var(--pb-ease-in-out) 250ms 1 both;
+}
+@keyframes pb-av-saludo {
+  0%, 100% { transform: rotate(0); }
+  17%, 50%, 83% { transform: rotate(16deg); }
+  33%, 67% { transform: rotate(-10deg); }
+}
+
+/* Señalar: el índice insiste un poco hacia lo que muestra */
+.pb-av--senala .pb-av__brazo--senala {
+  animation: pb-av-senala 1400ms var(--pb-ease-in-out) 400ms 2;
+}
+@keyframes pb-av-senala {
+  0%, 100% { transform: none; }
+  50% { transform: translateX(4px); }
+}
+
+/* Pensando: mira para arriba y levanta las cejas */
+.pb-av__ojos { transition: transform 160ms linear; }
+.pb-av__ceja { transition: transform 300ms var(--pb-ease-out); }
+.pb-av--piensa .pb-av__ceja { transform: translateY(-2.5px); }
+.pb-av--piensa .pb-av__parpado { transform: translateY(-2px); }
+
+/* Parpadeo cada tanto */
+.pb-av__parpado {
+  transform-box: view-box;
+  transform-origin: 80px 77px;
+  transition: transform 300ms var(--pb-ease-out);
+}
+.pb-av__ojos {
+  transform-box: view-box;
+}
+.pb-av__ojo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pb-av-parpadeo 5.2s infinite;
+}
+@keyframes pb-av-parpadeo {
+  0%, 94%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-av__brazo,
+  .pb-av__ceja,
+  .pb-av__parpado { transition: none; }
+  .pb-av__ojo,
+  .pb-av--saluda .pb-av__mano-saluda,
+  .pb-av--senala .pb-av__brazo--senala { animation: none; }
+}

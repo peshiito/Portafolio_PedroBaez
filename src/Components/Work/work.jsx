@@ -24,7 +24,7 @@ function Work() {
               <Link className="pb-work__link" to={`/proyectos/${p.slug}`}>
                 <span className="pb-work__media">
                   <img
-                    src={p.portada}
+                    src={p.tarjeta ?? p.portada}
                     alt={`Pantalla principal del sitio de ${p.name}`}
                     width={1400}
                     height={875}

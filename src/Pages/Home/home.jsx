@@ -8,6 +8,7 @@ import Testimonials from '../../Components/Testimonials/testimonials'
 import Faq from '../../Components/Faq/faq'
 import Contact from '../../Components/Contact/contact'
 import WhatsAppFlotante from '../../Components/WhatsAppFlotante/whatsappflotante'
+import Companero from '../../Components/Companero/companero'
 import { useReveal } from '../../hooks/useReveal'
 import { useMeta } from '../../hooks/useMeta'
 
@@ -32,6 +33,7 @@ function Home() {
       <Faq />
       <Contact />
       <WhatsAppFlotante />
+      <Companero />
     </>
   )
 }

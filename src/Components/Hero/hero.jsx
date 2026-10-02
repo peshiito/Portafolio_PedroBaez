@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import { ArrowUpRight, ArrowRight } from '../Logo/icons'
 import SiteMock from '../SiteMock/sitemock'
+import Avatar from '../Avatar/avatar'
 import { PROJECTS } from '../../data/projects'
 import './hero.css'
 
@@ -22,9 +22,6 @@ const DEMO = {
 }
 
 function Hero() {
-  // Mientras no exista /portrait.jpg, la presentación usa el monograma.
-  const [hasPhoto, setHasPhoto] = useState(true)
-
   return (
     <section className="pb-hero" id="inicio">
       <div className="container">
@@ -36,20 +33,9 @@ function Hero() {
         <div className="pb-hero__top">
           <div className="pb-hero__claim">
             <div className="pb-hero__me">
+              {/* Al scrollear lo reemplaza el compañero de la esquina */}
               <span className="pb-hero__avatar">
-                {hasPhoto ? (
-                  <img
-                    src="/portrait.jpg"
-                    alt="Pedro Baez"
-                    width={112}
-                    height={112}
-                    onError={() => setHasPhoto(false)}
-                  />
-                ) : (
-                  <span className="pb-mono" aria-hidden="true">
-                    PB
-                  </span>
-                )}
+                <Avatar pose="saluda" />
               </span>
               <h1 className="pb-display pb-hero__title">
                 Hola, soy <span className="pb-hero__title-red">Pedro Baez</span>

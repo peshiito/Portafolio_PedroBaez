@@ -44,7 +44,7 @@ Los proyectos, testimonios y números son de relleno. Para reemplazarlos:
 | Plantilla vs. a medida | `src/Components/Compare/compare.jsx` |
 | Testimonios | `src/Components/Testimonials/testimonials.jsx` |
 | Preguntas | `src/Components/Faq/faq.jsx` |
-| Tu foto | poné `public/portrait.jpg` (si falta, se muestra un monograma) |
+| Tu avatar | `src/Components/Avatar/avatar.jsx` (las frases del que acompaña el scroll, en `src/Components/Companero/companero.jsx`) |
 | Fotos y videos de los casos | poné los archivos en `public/proyectos/` y apuntá a ellos desde `src/data/projects.js` |
 
 Mientras una imagen o un video no exista, la página muestra un marcador que dice

@@ -1,0 +1,72 @@
+/* Abajo a la izquierda: la derecha es del botón de WhatsApp */
+.pb-comp {
+  position: fixed;
+  left: clamp(0.75rem, 2.5vw, 1.75rem);
+  bottom: calc(clamp(0.75rem, 2.5vw, 1.75rem) + env(safe-area-inset-bottom, 0px));
+  z-index: 44;
+  width: clamp(64px, 7vw, 92px);
+  height: clamp(64px, 7vw, 92px);
+  pointer-events: none;
+
+  opacity: 0;
+  transform: translateY(24px) scale(0.6);
+  transform-origin: bottom left;
+  transition: opacity 260ms ease, transform 520ms var(--pb-ease-out);
+}
+
+.pb-comp[data-visible] {
+  opacity: 1;
+  transform: none;
+}
+
+.pb-comp__cuerpo {
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 90%;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.18));
+}
+
+/* El globo sale de la cabeza del avatar */
+.pb-comp__globo {
+  position: absolute;
+  left: 70%;
+  bottom: 88%;
+  width: max-content;
+  max-width: min(15rem, 62vw);
+  margin: 0;
+  padding: 0.6rem 0.85rem;
+  border-radius: 14px 14px 14px 4px;
+  /* Claro con borde de tinta, igual que el avatar: se lee sobre las
+     secciones claras y las oscuras, en los dos temas */
+  background: #f3f1ec;
+  color: #3a352f;
+  border: 2px solid #3a352f;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+
+  opacity: 0;
+  transform: translateY(6px) scale(0.92);
+  transform-origin: bottom left;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.pb-comp__globo[data-on] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 220ms ease, transform 380ms var(--pb-ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-comp,
+  .pb-comp__globo,
+  .pb-comp__globo[data-on] {
+    transform: none;
+    transition: opacity 200ms ease;
+  }
+}
+
+@media print {
+  .pb-comp { display: none; }
+}
