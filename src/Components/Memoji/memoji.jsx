@@ -222,19 +222,23 @@ export function MemojiViajero() {
   const poseAnterior = useRef(pose)
 
   // Entra pasada la cinta del inicio y se retira antes del pie, porque esas
-  // dos franjas van de lado a lado y no le dejan lugar
+  // dos franjas van de lado a lado y no le dejan lugar. Se mide en cada scroll:
+  // un IntersectionObserver no avisa si un salto la pasa sin que llegue a verse,
+  // y el Memoji quedaba invisible para siempre.
   useEffect(() => {
     const cinta = document.querySelector('.pb-marquee')
     const pie = document.querySelector('footer')
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.target === cinta) setPasoCinta(!e.isIntersecting && e.boundingClientRect.top < 0)
-        else setEnPie(e.isIntersecting)
-      })
-    })
-    if (cinta) io.observe(cinta)
-    if (pie) io.observe(pie)
-    return () => io.disconnect()
+    const medir = () => {
+      setPasoCinta(cinta ? cinta.getBoundingClientRect().bottom < 0 : true)
+      setEnPie(pie ? pie.getBoundingClientRect().top < innerHeight : false)
+    }
+    medir()
+    addEventListener('scroll', medir, { passive: true })
+    addEventListener('resize', medir, { passive: true })
+    return () => {
+      removeEventListener('scroll', medir)
+      removeEventListener('resize', medir)
+    }
   }, [])
 
   // La sección que ocupa el centro de la pantalla manda la pose
