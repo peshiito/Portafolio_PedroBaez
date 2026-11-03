@@ -1,0 +1,156 @@
+.pb-memoji {
+  display: block;
+}
+
+.pb-memoji img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.16));
+}
+
+/* El buzo es negro: sobre fondo oscuro, un contorno claro lo despega */
+[data-bs-theme='dark'] .pb-memoji img,
+.pb-inverse .pb-memoji img {
+  filter: drop-shadow(0 0 1px rgba(228, 226, 221, 0.4));
+}
+
+/* Capa propia mientras está cerca: se mueve con la GPU, sin repintar la imagen */
+.pb-carril__movil[data-cerca],
+.pb-leve__movil[data-cerca] {
+  will-change: transform;
+}
+
+/* Respira apenas aunque no scrollees. Corre solo mientras está en pantalla. */
+.pb-flota {
+  animation: pb-flotar 3.2s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+[data-cerca] > .pb-flota,
+.pb-flota[data-cerca] {
+  animation-play-state: running;
+}
+
+@keyframes pb-flotar {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(1.5deg);
+  }
+}
+
+/* ---------- En celular: baja por el aire de cada sección ---------- */
+
+.pb-carril {
+  --pb-carril-aire: clamp(4.5rem, 10vw, 9.5rem); /* el padding de .pb-section */
+  position: absolute;
+  z-index: 2;
+  left: var(--pb-gutter);
+  right: var(--pb-gutter);
+  pointer-events: none;
+}
+
+.pb-carril--inicio {
+  top: 0;
+  height: var(--pb-carril-aire);
+}
+
+.pb-carril--cruce {
+  /* Arranca un poco más abajo: lo de arriba puede terminar justo en el borde */
+  top: calc(var(--pb-carril-aire) * -1 + 16px);
+  height: calc(var(--pb-carril-aire) * 2 - 16px);
+}
+
+.pb-carril__movil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 72px;
+  transform-origin: 50% 90%;
+}
+
+@media (min-width: 992px) {
+  .pb-carril {
+    display: none;
+  }
+}
+
+/* ---------- En computadora: recorre la página por una franja lateral ---------- */
+
+.pb-viajero {
+  display: none;
+  pointer-events: none;
+}
+
+@media (min-width: 992px) {
+  /* Le reserva 124 px a la derecha. En pantallas anchas ya sobran y no cambia nada. */
+  .pb-home .container {
+    padding-right: clamp(var(--pb-gutter), calc(124px - (100vw - 1280px) / 2), 124px);
+  }
+
+  .pb-viajero {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: clamp(8px, calc((100vw - 1280px) / 2 - 64px), 120px);
+    z-index: 44;
+    width: 108px;
+    opacity: 0;
+    transition: opacity 260ms ease;
+  }
+
+  .pb-viajero[data-visible] {
+    opacity: 1;
+  }
+}
+
+.pb-viajero__cuerpo {
+  will-change: transform;
+  transform: translate3d(0, 40vh, 0);
+  transform-origin: 50% 90%;
+}
+
+.pb-viajero__salto {
+  display: grid;
+}
+
+.pb-viajero__pose {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.pb-viajero__pose[data-on] {
+  opacity: 1;
+}
+
+/* ---------- El que se mece en su lugar ---------- */
+
+.pb-leve {
+  display: block;
+}
+
+.pb-leve__movil {
+  display: block;
+  transform-origin: 50% 90%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-flota {
+    animation: none;
+  }
+
+  .pb-viajero__pose {
+    transition: none;
+  }
+}
+
+@media print {
+  .pb-viajero,
+  .pb-carril {
+    display: none;
+  }
+}

@@ -38,8 +38,8 @@
 .pb-hero__avatar {
   display: block;
   flex: none;
-  width: clamp(76px, 10vw, 128px);
-  height: clamp(76px, 10vw, 128px);
+  width: clamp(104px, 11vw, 144px);
+  height: clamp(104px, 11vw, 144px);
 }
 
 .pb-hero__title {

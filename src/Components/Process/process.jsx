@@ -1,3 +1,4 @@
+import { MemojiCarril } from '../Memoji/memoji'
 import './process.css'
 
 const STAGES = [
@@ -26,6 +27,7 @@ const STAGES = [
 function Process() {
   return (
     <section className="pb-section" id="proceso">
+      <MemojiCarril nombre="hero" alt="Memoji de Pedro saludando con la mano" />
       <div className="container">
         <header className="pb-head pb-reveal">
           <div>

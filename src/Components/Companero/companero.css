@@ -4,8 +4,8 @@
   left: clamp(0.75rem, 2.5vw, 1.75rem);
   bottom: calc(clamp(0.75rem, 2.5vw, 1.75rem) + env(safe-area-inset-bottom, 0px));
   z-index: 44;
-  width: clamp(64px, 7vw, 92px);
-  height: clamp(64px, 7vw, 92px);
+  width: clamp(76px, 8vw, 112px);
+  height: clamp(76px, 8vw, 112px);
   pointer-events: none;
 
   opacity: 0;

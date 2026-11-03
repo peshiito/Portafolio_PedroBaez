@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
 import { Plus, Minus } from '../Logo/icons'
+import { MemojiCarril } from '../Memoji/memoji'
 import './faq.css'
 
 const QUESTIONS = [
@@ -35,6 +36,10 @@ function Faq() {
 
   return (
     <section className="pb-section" id="preguntas">
+      <MemojiCarril
+        nombre="institucional"
+        alt="Memoji de Pedro pensando, con la mano en el mentón"
+      />
       <div className="container pb-faq__grid">
         <div className="pb-faq__aside pb-reveal">
           <p className="pb-mono pb-head__label">(06) Preguntas</p>

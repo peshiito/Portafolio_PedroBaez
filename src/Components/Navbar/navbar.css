@@ -31,19 +31,28 @@
   border-radius: 50%;
   background: var(--pb-red);
   flex: none;
-  box-shadow: 0 0 0 0 rgba(255, 49, 49, 0.7);
+  position: relative;
+}
+
+/* El pulso es un círculo aparte: transform y opacity no obligan a repintar */
+.pb-utility__dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--pb-red);
   animation: pb-pulse 2.6s var(--pb-ease-out) infinite;
 }
 
 @keyframes pb-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 49, 49, 0.6);
+    transform: scale(1);
+    opacity: 0.6;
   }
-  70% {
-    box-shadow: 0 0 0 7px rgba(255, 49, 49, 0);
-  }
+  70%,
   100% {
-    box-shadow: 0 0 0 0 rgba(255, 49, 49, 0);
+    transform: scale(3);
+    opacity: 0;
   }
 }
 
@@ -70,16 +79,10 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--pb-bg) 82%, transparent);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  /* Sin backdrop-filter: el desenfoque se recalculaba en cada cuadro de scroll
+     y era lo más caro de pintar de toda la página. */
+  background: color-mix(in srgb, var(--pb-bg) 97%, transparent);
   border-bottom: 1px solid var(--pb-rule);
-}
-
-@supports not (backdrop-filter: blur(1px)) {
-  .pb-nav {
-    background: var(--pb-bg);
-  }
 }
 
 .pb-nav__inner {
@@ -315,7 +318,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pb-utility__dot {
+  .pb-utility__dot::after {
     animation: none;
   }
   .pb-menu__link {

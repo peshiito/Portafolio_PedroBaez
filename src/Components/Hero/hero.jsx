@@ -1,6 +1,6 @@
 import { ArrowUpRight, ArrowRight } from '../Logo/icons'
 import SiteMock from '../SiteMock/sitemock'
-import Avatar from '../Avatar/avatar'
+import Memoji from '../Memoji/memoji'
 import { PROJECTS } from '../../data/projects'
 import './hero.css'
 
@@ -33,9 +33,13 @@ function Hero() {
         <div className="pb-hero__top">
           <div className="pb-hero__claim">
             <div className="pb-hero__me">
-              {/* Al scrollear lo reemplaza el compañero de la esquina */}
               <span className="pb-hero__avatar">
-                <Avatar pose="saluda" />
+                <Memoji
+                  nombre="hero"
+                  alt="Memoji de Pedro saludando con la mano"
+                  sizes="(min-width: 992px) 144px, 104px"
+                  prioridad
+                />
               </span>
               <h1 className="pb-display pb-hero__title">
                 Hola, soy <span className="pb-hero__title-red">Pedro Baez</span>

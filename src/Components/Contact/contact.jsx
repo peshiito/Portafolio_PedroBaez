@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Mail, Phone, Pin, ArrowUpRight } from '../Logo/icons'
 import { WhatsAppIcon } from '../Logo/whatsapp'
 import { CONTACTO, linkWhatsApp, telefonoVisible } from '../../data/contacto'
+import { MemojiCarril } from '../Memoji/memoji'
 import './contact.css'
 
 const NEEDS = [
@@ -73,6 +74,11 @@ function Contact() {
 
   return (
     <section className="pb-section pb-contact" id="contacto">
+      <MemojiCarril
+        haciaDerecha={false}
+        nombre="contacto"
+        alt="Memoji de Pedro hablando por teléfono"
+      />
       <div className="container pb-contact__grid">
         <div className="pb-contact__aside pb-reveal">
           <p className="pb-mono pb-head__label">(07) Hablemos</p>

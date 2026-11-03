@@ -35,6 +35,22 @@
   touch-action: manipulation;
 }
 
+/* El Memoji se apoya sobre la captura: la figura le da el marco, porque
+   .pb-work__media recorta lo que se le sale. */
+.pb-work__figura {
+  display: block;
+  position: relative;
+}
+
+.pb-work__memoji {
+  position: absolute;
+  right: clamp(0.5rem, 1.5vw, 1rem);
+  /* Se queda arriba de la línea con el nombre y el año */
+  bottom: calc(1.25rem + 0.25rem);
+  width: clamp(80px, 9vw, 120px);
+  pointer-events: none;
+}
+
 .pb-work__media {
   display: block;
   overflow: hidden;

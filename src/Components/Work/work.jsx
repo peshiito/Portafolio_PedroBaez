@@ -1,11 +1,27 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, ArrowRight } from '../Logo/icons'
 import { PROJECTS } from '../../data/projects'
+import { MemojiCarril, MemojiLeve } from '../Memoji/memoji'
 import './work.css'
+
+// Qué Memoji acompaña a cada proyecto, según el tipo de sitio que es
+const MEMOJI = {
+  comanda: { nombre: 'completo', alt: 'Memoji de Pedro asomado detrás de una notebook' },
+  'oficio-barberia': { nombre: 'completo', alt: 'Memoji de Pedro asomado detrás de una notebook' },
+  'hardstore-asesor': { nombre: 'chatbot', alt: 'Memoji de Pedro con un robotito en la mano' },
+  gimnasio: { nombre: 'institucional', alt: 'Memoji de Pedro pensando, con la mano en el mentón' },
+  'itech-solutions': { nombre: 'landing', alt: 'Memoji de Pedro mostrando un celular' },
+  vetclinic: { nombre: 'institucional', alt: 'Memoji de Pedro pensando, con la mano en el mentón' },
+}
 
 function Work() {
   return (
     <section className="pb-section" id="trabajos">
+      <MemojiCarril
+        haciaDerecha={false}
+        nombre="chatbot"
+        alt="Memoji de Pedro con un robotito en la mano"
+      />
       <div className="container">
         <header className="pb-head pb-reveal">
           <div>
@@ -22,15 +38,18 @@ function Work() {
           {PROJECTS.map((p) => (
             <li className="pb-work__item pb-reveal" key={p.slug}>
               <Link className="pb-work__link" to={`/proyectos/${p.slug}`}>
-                <span className="pb-work__media">
-                  <img
-                    src={p.tarjeta ?? p.portada}
-                    alt={`Pantalla principal del sitio de ${p.name}`}
-                    width={1400}
-                    height={875}
-                    loading="lazy"
-                    decoding="async"
-                  />
+                <span className="pb-work__figura">
+                  <span className="pb-work__media">
+                    <img
+                      src={p.tarjeta ?? p.portada}
+                      alt={`Pantalla principal del sitio de ${p.name}`}
+                      width={1400}
+                      height={875}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </span>
+                  {MEMOJI[p.slug] && <MemojiLeve className="pb-work__memoji" {...MEMOJI[p.slug]} />}
                 </span>
                 <span className="pb-work__meta">
                   <span className="pb-display pb-work__name">

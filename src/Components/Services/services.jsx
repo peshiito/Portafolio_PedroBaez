@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
 import { Plus, Minus, ArrowUpRight } from '../Logo/icons'
+import { MemojiCarril } from '../Memoji/memoji'
 import './services.css'
 
 const SERVICES = [
@@ -47,6 +48,11 @@ function Services() {
 
   return (
     <section className="pb-section" id="servicios">
+      <MemojiCarril
+        tipo="inicio"
+        nombre="servicios"
+        alt="Memoji de Pedro con el dedo en alto y una lamparita encendida"
+      />
       <div className="container">
         <header className="pb-head pb-reveal">
           <div>

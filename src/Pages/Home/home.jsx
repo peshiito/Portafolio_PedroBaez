@@ -8,7 +8,7 @@ import Testimonials from '../../Components/Testimonials/testimonials'
 import Faq from '../../Components/Faq/faq'
 import Contact from '../../Components/Contact/contact'
 import WhatsAppFlotante from '../../Components/WhatsAppFlotante/whatsappflotante'
-import Companero from '../../Components/Companero/companero'
+import { MemojiViajero } from '../../Components/Memoji/memoji'
 import { useReveal } from '../../hooks/useReveal'
 import { useMeta } from '../../hooks/useMeta'
 
@@ -22,7 +22,7 @@ function Home() {
   })
 
   return (
-    <>
+    <div className="pb-home">
       <Hero />
       <Marquee />
       <Services />
@@ -33,8 +33,8 @@ function Home() {
       <Faq />
       <Contact />
       <WhatsAppFlotante />
-      <Companero />
-    </>
+      <MemojiViajero />
+    </div>
   )
 }
 export default Home

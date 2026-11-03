@@ -1,4 +1,5 @@
 import { ArrowUpRight } from '../Logo/icons'
+import { MemojiCarril } from '../Memoji/memoji'
 import './compare.css'
 
 /* Cada fila nombra su tema en los dos lados: así se entiende sin depender
@@ -39,6 +40,12 @@ const ROWS = [
 function Compare() {
   return (
     <section className="pb-section pb-inverse pb-cmp" id="comparativa">
+      <MemojiCarril
+        tipo="inicio"
+        haciaDerecha={false}
+        nombre="landing"
+        alt="Memoji de Pedro mostrando un celular"
+      />
       <div className="container">
         <header className="pb-head pb-reveal">
           <div>

@@ -13,7 +13,7 @@ import './companero.css'
 const SECCIONES = {
   servicios: { pose: 'senala', frase: 'Elegí por dónde empezar.' },
   comparativa: { pose: 'neutral', frase: 'Esto es lo que cambia.' },
-  proceso: { pose: 'neutral', frase: 'Así trabajamos juntos.' },
+  proceso: { pose: 'pulgar', frase: 'Así trabajamos juntos.' },
   trabajos: { pose: 'senala', frase: 'Entrá a cualquiera, se ven por dentro.' },
   preguntas: { pose: 'piensa', frase: '¿Dudas? Acá están las de siempre.' },
   contacto: { pose: 'saluda', frase: 'Escribime, te contesto hoy.' },
@@ -68,17 +68,23 @@ function Companero() {
     let ultimoT = performance.now()
     let objetivo = 0
     let giro = 0
+    let pelo = 0
     let cuadro = 0
 
     const paso = () => {
       // Resorte simple hacia el objetivo, que a su vez decae a cero
       giro += (objetivo - giro) * 0.14
       objetivo *= 0.9
+      // El pelo llega tarde y se pasa un poco: se nota que tiene peso
+      pelo += (giro - pelo) * 0.07
       const vaiven = Math.sin(scrollY / 70) * 3
       if (cuerpo.current) {
         cuerpo.current.style.transform = `translate(${giro * 1.1 + vaiven}px, ${Math.abs(vaiven) * -0.6}px) rotate(${giro}deg)`
+        const mechon = cuerpo.current.querySelector('.pb-av__pelo')
+        if (mechon) mechon.style.transform = `rotate(${(pelo - giro) * 1.6}deg)`
       }
-      cuadro = Math.abs(giro) > 0.05 || Math.abs(objetivo) > 0.05 ? requestAnimationFrame(paso) : 0
+      const quieto = Math.abs(giro) < 0.05 && Math.abs(objetivo) < 0.05 && Math.abs(pelo - giro) < 0.05
+      cuadro = quieto ? 0 : requestAnimationFrame(paso)
     }
 
     const alScrollear = () => {
