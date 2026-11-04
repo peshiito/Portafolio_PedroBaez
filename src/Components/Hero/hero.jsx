@@ -47,8 +47,8 @@ function Hero() {
             </div>
 
             <p className="pb-lead pb-hero__lead">
-              Diseño y programo sitios web a medida para negocios que ya funcionan bien en persona.
-              Trabajo con pocos clientes a la vez, así que el que me escribe habla conmigo.
+              Sitios web a medida para negocios que ya funcionan bien en persona. Trabajo con pocos
+              clientes a la vez: el que me escribe habla conmigo.
             </p>
 
             <div className="pb-hero__actions">

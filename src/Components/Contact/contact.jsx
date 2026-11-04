@@ -76,6 +76,7 @@ function Contact() {
     <section className="pb-section pb-contact" id="contacto">
       <MemojiCarril
         haciaDerecha={false}
+        seccion="contacto"
         nombre="contacto"
         alt="Memoji de Pedro hablando por teléfono"
       />

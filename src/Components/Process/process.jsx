@@ -5,29 +5,29 @@ const STAGES = [
   {
     step: 'Etapa 01',
     title: 'Conversamos',
-    text: 'Media hora por videollamada o un café. Me contás qué vendés y a quién. Salís de ahí sabiendo qué se puede hacer y para cuándo.',
+    text: 'Media hora por videollamada o un café. Salís sabiendo qué se puede hacer y para cuándo.',
   },
   {
     step: 'Etapa 02',
     title: 'Diseño',
-    text: 'Te muestro cómo va a verse antes de escribir una sola línea de código. Ajustamos hasta que te guste de verdad.',
+    text: 'Te muestro cómo va a verse antes de programar. Ajustamos hasta que te guste.',
   },
   {
     step: 'Etapa 03',
     title: 'Desarrollo',
-    text: 'Lo construyo a mano. Rápido en el celular, visible en Google y fácil de actualizar para vos.',
+    text: 'Lo construyo a mano: rápido en el celular, visible en Google y fácil de actualizar.',
   },
   {
     step: 'Etapa 04',
     title: 'Entrega',
-    text: 'Publicamos, te enseño a cargar contenido y quedo disponible treinta días por cualquier cosa.',
+    text: 'Publicamos, te enseño a cargar contenido y quedo disponible treinta días.',
   },
 ]
 
 function Process() {
   return (
     <section className="pb-section" id="proceso">
-      <MemojiCarril nombre="hero" alt="Memoji de Pedro saludando con la mano" />
+      <MemojiCarril seccion="proceso" nombre="hero" alt="Memoji de Pedro saludando con la mano" />
       <div className="container">
         <header className="pb-head pb-reveal">
           <div>
@@ -35,8 +35,7 @@ function Process() {
             <h2 className="pb-display pb-d2">De la primera charla al sitio publicado</h2>
           </div>
           <p className="pb-lead pb-muted">
-            Cuatro etapas y nada de sorpresas. En cada una sabés qué está pasando, qué falta y
-            cuándo te toca a vos.
+            Cuatro etapas y nada de sorpresas.
           </p>
         </header>
 

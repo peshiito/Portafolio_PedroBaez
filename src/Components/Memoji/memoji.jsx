@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { SECCIONES } from '../../data/memojis'
 import './memoji.css'
 
 /**
@@ -166,13 +167,19 @@ function useMovimiento({ modo, haciaDerecha }) {
  * la sección anterior. Por ahí no pasa ningún texto. En computadora no se
  * muestra: ahí el que recorre la página es MemojiViajero.
  */
-export function MemojiCarril({ tipo = 'cruce', haciaDerecha = true, ...memoji }) {
+export function MemojiCarril({ tipo = 'cruce', haciaDerecha = true, seccion, ...memoji }) {
   const { el, caja } = useMovimiento({ modo: 'carril', haciaDerecha })
+  const frase = SECCIONES[seccion]?.frase
   return (
     <div className={`pb-carril pb-carril--${tipo}`} ref={caja}>
-      <div className="pb-carril__movil" ref={el}>
+      <div className="pb-carril__movil" data-lado={haciaDerecha ? 'der' : 'izq'} ref={el}>
         <div className="pb-flota">
-          <Memoji sizes="72px" {...memoji} />
+          <Memoji sizes="96px" {...memoji} />
+          {frase && (
+            <p className="pb-globo" aria-hidden="true">
+              {frase}
+            </p>
+          )}
         </div>
       </div>
     </div>
@@ -193,19 +200,11 @@ export function MemojiLeve({ className = '', ...memoji }) {
 
 /* ---------- El que recorre la página ---------- */
 
-// Qué pose toma en cada sección. Testimonios no tiene id: conserva la anterior.
-const POSES = {
-  servicios: 'servicios',
-  comparativa: 'landing',
-  proceso: 'hero',
-  trabajos: 'completo',
-  preguntas: 'institucional',
-  contacto: 'contacto',
-}
-const NOMBRES = [...new Set(Object.values(POSES))]
+const NOMBRES = [...new Set(Object.values(SECCIONES).map((s) => s.pose))]
 const TRAMOS = 7 // veces que recorre la pantalla de punta a punta en toda la página
-const ARRIBA = 96 // debajo de la barra de navegación
-const ABAJO = 150 // arriba del botón de WhatsApp
+const ARRIBA = 190 // debajo de la barra de navegación, con lugar para el globo
+const ABAJO = 100 // arriba del botón de WhatsApp
+const BARRA = 90 // alto de la barra de navegación
 
 /**
  * Solo en computadora. Recorre en vertical la franja lateral que le reservan
@@ -216,10 +215,12 @@ export function MemojiViajero() {
   const [pasoCinta, setPasoCinta] = useState(false)
   const [enPie, setEnPie] = useState(false)
   const visible = pasoCinta && !enPie
-  const [pose, setPose] = useState(NOMBRES[0])
+  const [seccion, setSeccion] = useState('servicios')
   const cuerpo = useRef(null)
+  const inclinable = useRef(null)
   const salto = useRef(null)
-  const poseAnterior = useRef(pose)
+  const seccionAnterior = useRef(seccion)
+  const { pose, frase } = SECCIONES[seccion]
 
   // Entra pasada la cinta del inicio y se retira antes del pie, porque esas
   // dos franjas van de lado a lado y no le dejan lugar. Se mide en cada scroll:
@@ -229,7 +230,8 @@ export function MemojiViajero() {
     const cinta = document.querySelector('.pb-marquee')
     const pie = document.querySelector('footer')
     const medir = () => {
-      setPasoCinta(cinta ? cinta.getBoundingClientRect().bottom < 0 : true)
+      // La barra de navegación ya la tapa antes de que salga de la pantalla
+      setPasoCinta(cinta ? cinta.getBoundingClientRect().bottom < BARRA : true)
       setEnPie(pie ? pie.getBoundingClientRect().top < innerHeight : false)
     }
     medir()
@@ -244,30 +246,30 @@ export function MemojiViajero() {
   // La sección que ocupa el centro de la pantalla manda la pose
   useEffect(() => {
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setPose(POSES[e.target.id])),
+      (entries) => entries.forEach((e) => e.isIntersecting && setSeccion(e.target.id)),
       { rootMargin: '-45% 0px -45% 0px' },
     )
-    Object.keys(POSES).forEach((id) => {
+    Object.keys(SECCIONES).forEach((id) => {
       const el = document.getElementById(id)
       if (el) io.observe(el)
     })
     return () => io.disconnect()
   }, [])
 
-  // Un saltito en cada cambio de pose
+  // Un salto en cada cambio de sección
   useEffect(() => {
-    if (poseAnterior.current === pose) return
-    poseAnterior.current = pose
+    if (seccionAnterior.current === seccion) return
+    seccionAnterior.current = seccion
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
     salto.current?.animate(
       [
         { transform: 'translateY(0) scale(1)' },
-        { transform: 'translateY(-18px) scale(1.1)', offset: 0.4 },
+        { transform: 'translateY(-24px) scale(1.12)', offset: 0.4 },
         { transform: 'translateY(0) scale(1)' },
       ],
       { duration: 520, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' },
     )
-  }, [pose])
+  }, [seccion])
 
   // El recorrido. Se escribe el transform directo: pasa en cada cuadro.
   useEffect(() => {
@@ -301,7 +303,7 @@ export function MemojiViajero() {
       const ida = easing(fase <= 1 ? fase : 2 - fase)
       const recorrido = Math.max(0, innerHeight - altoCuerpo - ARRIBA - ABAJO)
       const metaY = ARRIBA + recorrido * ida
-      const metaX = Math.sin(p * TRAMOS * Math.PI) * 8
+      const metaX = Math.sin(p * TRAMOS * Math.PI) * 6
 
       if (y === null) y = metaY
       ;[y, vy] = suavizar(y, metaY, vy, 0.38, dt)
@@ -309,7 +311,10 @@ export function MemojiViajero() {
       inclinacion *= Math.exp(-dt * 5)
       ;[giro, vGiro] = suavizar(giro, inclinacion, vGiro, 0.16, dt)
 
-      nodo.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${giro.toFixed(2)}deg)`
+      // Se inclina solo el Memoji: el globo lo acompaña derecho, porque por estar
+      // lejos del eje de giro se salía de la pantalla
+      nodo.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
+      if (inclinable.current) inclinable.current.style.transform = `rotate(${giro.toFixed(2)}deg)`
 
       const quieto =
         Math.abs(metaY - y) < 0.1 &&
@@ -350,13 +355,18 @@ export function MemojiViajero() {
   return (
     <div className="pb-viajero" data-visible={visible || undefined} aria-hidden="true">
       <div className="pb-viajero__cuerpo" ref={cuerpo}>
-        <div className="pb-flota" data-cerca={visible || undefined}>
-          <div className="pb-viajero__salto" ref={salto}>
-            {NOMBRES.map((n) => (
-              <div className="pb-viajero__pose" data-on={n === pose || undefined} key={n}>
-                <Memoji nombre={n} alt="" sizes="108px" />
-              </div>
-            ))}
+        <p className="pb-globo pb-globo--arriba" key={seccion}>
+          {frase}
+        </p>
+        <div className="pb-viajero__inclina" ref={inclinable}>
+          <div className="pb-flota" data-cerca={visible || undefined}>
+            <div className="pb-viajero__salto" ref={salto}>
+              {NOMBRES.map((n) => (
+                <div className="pb-viajero__pose" data-on={n === pose || undefined} key={n}>
+                  <Memoji nombre={n} alt="" sizes="190px" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

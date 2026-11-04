@@ -19,6 +19,7 @@ function Work() {
     <section className="pb-section" id="trabajos">
       <MemojiCarril
         haciaDerecha={false}
+        seccion="trabajos"
         nombre="chatbot"
         alt="Memoji de Pedro con un robotito en la mano"
       />
@@ -29,8 +30,7 @@ function Work() {
             <h2 className="pb-display pb-d2">Proyectos que construí</h2>
           </div>
           <p className="pb-lead pb-muted">
-            Sitios y sistemas completos, de la primera pantalla a la base de datos. Entrá a
-            cualquiera para ver cómo está hecho por dentro.
+            Sitios y sistemas completos. Entrá a cualquiera para ver cómo está hecho por dentro.
           </p>
         </header>
 

@@ -42,6 +42,21 @@
   }
 }
 
+/* Claro con borde de tinta: se lee sobre las secciones claras y las oscuras,
+   en los dos temas */
+.pb-globo {
+  margin: 0;
+  padding: 0.55rem 0.8rem;
+  background: #f3f1ec;
+  color: #3a352f;
+  border: 2px solid #3a352f;
+  border-radius: 14px 14px 4px 14px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
 /* ---------- En celular: baja por el aire de cada sección ---------- */
 
 .pb-carril {
@@ -68,8 +83,36 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 72px;
+  width: 88px;
   transform-origin: 50% 90%;
+}
+
+/* Las secciones que arrancan pegadas a otra le dejan más aire al Memoji */
+@media (max-width: 991px) {
+  .pb-section:has(> .pb-carril--inicio) {
+    padding-top: 7rem;
+  }
+
+  .pb-carril--inicio {
+    height: 7rem;
+  }
+}
+
+/* El globo se abre hacia el centro de la pantalla, donde hay lugar */
+.pb-carril__movil .pb-globo {
+  position: absolute;
+  top: 8px;
+  width: min(12.5rem, calc(100vw - 2 * var(--pb-gutter) - 100px));
+}
+
+.pb-carril__movil[data-lado='der'] .pb-globo {
+  right: calc(100% + 6px);
+  border-radius: 14px 14px 4px 14px;
+}
+
+.pb-carril__movil[data-lado='izq'] .pb-globo {
+  left: calc(100% + 6px);
+  border-radius: 14px 14px 14px 4px;
 }
 
 @media (min-width: 992px) {
@@ -86,30 +129,63 @@
 }
 
 @media (min-width: 992px) {
-  /* Le reserva 124 px a la derecha. En pantallas anchas ya sobran y no cambia nada. */
-  .pb-home .container {
-    padding-right: clamp(var(--pb-gutter), calc(124px - (100vw - 1280px) / 2), 124px);
+  .pb-home {
+    --pb-via: clamp(130px, 13vw, 190px);
+    --pb-via-franja: calc(var(--pb-via) + 24px);
+  }
+
+  /* La página se acomoda a él: las secciones le dejan la franja derecha libre.
+     El inicio queda entero, porque ahí todavía no apareció. */
+  .pb-home .pb-section .container {
+    padding-right: clamp(
+      var(--pb-gutter),
+      calc(var(--pb-via-franja) - (100vw - 1280px) / 2),
+      var(--pb-via-franja)
+    );
   }
 
   .pb-viajero {
     display: block;
     position: fixed;
     top: 0;
-    right: clamp(8px, calc((100vw - 1280px) / 2 - 64px), 120px);
+    right: max(10px, calc(((100vw - 1280px) / 2 + var(--pb-gutter) - var(--pb-via)) / 2));
     z-index: 44;
-    width: 108px;
+    width: var(--pb-via);
     opacity: 0;
-    transition: opacity 260ms ease;
+    transform: scale(0.7);
+    transform-origin: 100% 40%;
+    transition: opacity 260ms ease, transform 520ms var(--pb-ease-out);
   }
 
   .pb-viajero[data-visible] {
     opacity: 1;
+    transform: none;
+  }
+}
+
+.pb-globo--arriba {
+  position: absolute;
+  font-size: clamp(0.8125rem, 1vw, 0.9375rem);
+  right: 0;
+  bottom: calc(100% + 6px);
+  width: 100%;
+  animation: pb-globo-entra 380ms var(--pb-ease-out) both;
+}
+
+@keyframes pb-globo-entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
   }
 }
 
 .pb-viajero__cuerpo {
   will-change: transform;
   transform: translate3d(0, 40vh, 0);
+}
+
+.pb-viajero__inclina {
+  will-change: transform;
   transform-origin: 50% 90%;
 }
 
@@ -145,6 +221,15 @@
 
   .pb-viajero__pose {
     transition: none;
+  }
+
+  .pb-viajero,
+  .pb-viajero[data-visible] {
+    transform: none;
+  }
+
+  .pb-globo--arriba {
+    animation: none;
   }
 }
 

@@ -1,3 +1,4 @@
+import { MemojiCarril } from '../Memoji/memoji'
 import './testimonials.css'
 
 const SECONDARY = [
@@ -27,7 +28,12 @@ function Avatar({ initials }) {
 
 function Testimonials() {
   return (
-    <section className="pb-section pb-inverse pb-tstm" aria-labelledby="tstm-title">
+    <section className="pb-section pb-inverse pb-tstm" id="opiniones" aria-labelledby="tstm-title">
+      <MemojiCarril
+        seccion="opiniones"
+        nombre="completo"
+        alt="Memoji de Pedro asomado detrás de una notebook"
+      />
       <div className="container">
         <p className="pb-mono pb-head__label pb-tstm__label pb-reveal" id="tstm-title">
           (05) Lo que dicen

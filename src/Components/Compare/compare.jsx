@@ -21,14 +21,9 @@ const ROWS = [
     medida: 'Abre en menos de dos segundos.',
   },
   {
-    tema: 'Cuando hay que cambiar algo',
-    plantilla: 'Lo peleás vos un domingo a la noche.',
-    medida: 'Me escribís y lo resuelvo.',
-  },
-  {
     tema: 'En Google',
     plantilla: 'Te encuentran de casualidad.',
-    medida: 'Fichas, títulos y mapa configurados desde el día uno.',
+    medida: 'Configurado desde el día uno.',
   },
   {
     tema: 'Si algo se rompe',
@@ -43,6 +38,7 @@ function Compare() {
       <MemojiCarril
         tipo="inicio"
         haciaDerecha={false}
+        seccion="comparativa"
         nombre="landing"
         alt="Memoji de Pedro mostrando un celular"
       />
@@ -53,8 +49,7 @@ function Compare() {
             <h2 className="pb-display pb-d2">Hacerlo solo o hacerlo bien</h2>
           </div>
           <p className="pb-lead pb-muted">
-            Casi todos los que me escriben vienen de probar una plantilla. Esto es lo que cambia
-            cuando el sitio se hace para tu negocio y no para cualquiera.
+            Esto es lo que cambia cuando el sitio se hace para tu negocio y no para cualquiera.
           </p>
         </header>
 
