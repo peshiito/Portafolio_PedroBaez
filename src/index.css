@@ -378,9 +378,16 @@ img {
    con lo que las filas del acordeón desaparecían al abrirlas. */
 .pb-reveal {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 700ms var(--pb-ease-out), transform 700ms var(--pb-ease-out);
+  transform: translateY(28px);
+  transition: opacity 800ms var(--pb-ease-out), transform 800ms var(--pb-ease-out);
 }
+
+/* En las listas aparecen de a uno, como si se fueran cargando */
+.pb-reveal:nth-child(2) { transition-delay: 70ms; }
+.pb-reveal:nth-child(3) { transition-delay: 140ms; }
+.pb-reveal:nth-child(4) { transition-delay: 210ms; }
+.pb-reveal:nth-child(5) { transition-delay: 280ms; }
+.pb-reveal:nth-child(n + 6) { transition-delay: 350ms; }
 
 .pb-reveal[data-in] {
   opacity: 1;

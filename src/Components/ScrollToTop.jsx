@@ -15,6 +15,8 @@ function ScrollToTop() {
         el.scrollIntoView({ behavior: 'instant', block: 'start' })
         return
       }
+      // En la home la sección puede no haber cargado todavía: la busca la propia home
+      if (pathname === '/') return
     }
     window.scrollTo(0, 0)
   }, [pathname, hash])

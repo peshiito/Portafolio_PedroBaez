@@ -1,0 +1,46 @@
+/* El lugar de una sección que todavía no llegó */
+.pb-dif__hueco {
+  min-height: var(--pb-dif-alto-m);
+  padding-block: clamp(4.5rem, 10vw, 9.5rem);
+}
+
+@media (min-width: 992px) {
+  .pb-dif__hueco {
+    min-height: var(--pb-dif-alto);
+  }
+}
+
+.pb-dif__hueco .container {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.pb-dif__linea {
+  display: block;
+  width: min(14rem, 50%);
+  height: 0.9rem;
+  border-radius: 6px;
+  background: var(--pb-rule);
+  animation: pb-dif-latir 1.3s ease-in-out infinite alternate;
+}
+
+.pb-dif__linea--titulo {
+  width: min(32rem, 85%);
+  height: clamp(2rem, 5vw, 3.5rem);
+}
+
+@keyframes pb-dif-latir {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-dif__linea {
+    animation: none;
+  }
+}

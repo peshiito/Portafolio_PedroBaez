@@ -8,6 +8,7 @@ import './work.css'
 const MEMOJI = {
   comanda: { nombre: 'comanda', alt: 'Memoji de Pedro llevando una bandeja con un plato de comida' },
   'oficio-barberia': { nombre: 'barberia', alt: 'Memoji de Pedro con una tijera y un peine de barbero' },
+  'tienda-recargas': { nombre: 'tienda', alt: 'Memoji de Pedro con un diamante en la mano' },
   'hardstore-asesor': { nombre: 'chatbot', alt: 'Memoji de Pedro con un robotito en la mano' },
   gimnasio: { nombre: 'institucional', alt: 'Memoji de Pedro pensando, con la mano en el mentón' },
   'itech-solutions': { nombre: 'landing', alt: 'Memoji de Pedro mostrando un celular' },

@@ -191,6 +191,9 @@
 
 .pb-viajero__salto {
   display: grid;
+  /* Ocupa su lugar aunque la pose todavía no haya cargado: de esta medida sale
+     hasta dónde puede bajar sin meterse detrás del botón de WhatsApp */
+  aspect-ratio: 1;
 }
 
 .pb-viajero__pose {

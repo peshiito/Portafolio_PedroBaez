@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { SECCIONES } from '../../data/memojis'
+import { useSeccionesMontadas } from '../../hooks/seccionesDiferidas'
 import './memoji.css'
 
 /**
@@ -200,7 +201,6 @@ export function MemojiLeve({ className = '', ...memoji }) {
 
 /* ---------- El que recorre la página ---------- */
 
-const NOMBRES = [...new Set(Object.values(SECCIONES).map((s) => s.pose))]
 const TRAMOS = 7 // veces que recorre la pantalla de punta a punta en toda la página
 const ARRIBA = 190 // debajo de la barra de navegación, con lugar para el globo
 const ABAJO = 100 // arriba del botón de WhatsApp
@@ -220,7 +220,11 @@ export function MemojiViajero() {
   const inclinable = useRef(null)
   const salto = useRef(null)
   const seccionAnterior = useRef(seccion)
+  const montadas = useSeccionesMontadas()
+  // Solo las poses que ya le tocaron: las demás no se descargan hasta entonces
+  const [vistas, setVistas] = useState([])
   const { pose, frase } = SECCIONES[seccion]
+  if (visible && !vistas.includes(pose)) setVistas([...vistas, pose])
 
   // Entra pasada la cinta del inicio y se retira antes del pie, porque esas
   // dos franjas van de lado a lado y no le dejan lugar. Se mide en cada scroll:
@@ -254,7 +258,8 @@ export function MemojiViajero() {
       if (el) io.observe(el)
     })
     return () => io.disconnect()
-  }, [])
+    // Las secciones se suman a medida que te acercás: hay que volver a mirar
+  }, [montadas])
 
   // Un salto en cada cambio de sección
   useEffect(() => {
@@ -361,7 +366,7 @@ export function MemojiViajero() {
         <div className="pb-viajero__inclina" ref={inclinable}>
           <div className="pb-flota" data-cerca={visible || undefined}>
             <div className="pb-viajero__salto" ref={salto}>
-              {NOMBRES.map((n) => (
+              {vistas.map((n) => (
                 <div className="pb-viajero__pose" data-on={n === pose || undefined} key={n}>
                   <Memoji nombre={n} alt="" sizes="190px" />
                 </div>

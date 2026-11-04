@@ -250,6 +250,48 @@ export const PROJECTS = [
   },
 
   {
+    // Encargo privado: sin nombre, enlace, proveedores ni medios de cobro. Las
+    // capturas salen de correrla con datos inventados, nunca del sitio real.
+    slug: 'tienda-recargas',
+    name: 'Tienda de recargas',
+    year: '2026',
+    kind: 'Tienda para gamers',
+    what: 'Recargas de diamantes automáticas',
+    sitio: null,
+    lugar: 'Encargo privado',
+    rol: 'Diseño, frontend, backend e integraciones',
+    duracion: 'Encargo privado',
+    stack: ['React', 'Vite', 'Node', 'Express', 'TypeScript', 'MariaDB', 'Prisma'],
+
+    resumen:
+      'Una tienda donde el comprador elige un paquete, carga el ID de su cuenta, paga y recibe la recarga sin que nadie la cargue a mano. Es un encargo privado: las capturas usan nombre y precios de ejemplo.',
+    desafio:
+      'Cada venta se cargaba a mano, una por una. Si nadie podía atenderla, el comprador esperaba, y un error al escribir un ID significaba mandar la recarga a la cuenta equivocada.',
+    solucion:
+      'El comprador verifica su cuenta antes de pagar. Cuando el pago se confirma, el sistema hace la compra solo y la recarga llega directo a ese ID. Si un proveedor falla, pasa al siguiente, y desde un panel se sigue cada pedido.',
+    entregables: [
+      'Compra en tres pasos desde el celular',
+      'Verificación de la cuenta antes de pagar',
+      'Recarga automática al confirmarse el pago',
+      'Un pedido no se puede cobrar ni cargar dos veces',
+      'Panel para seguir pedidos y resolver excepciones',
+    ],
+    datos: [
+      { n: '154', label: 'Archivos de pruebas automáticas' },
+      { n: '2', label: 'Proveedores, con respaldo automático' },
+      { n: '2', label: 'Medios de cobro a elegir' },
+    ],
+    testimonio: null,
+    portada: '/proyectos/tienda-portada.webp',
+    tarjeta: '/proyectos/tienda-tarjeta.webp',
+    video: null,
+    galeria: [
+      { src: '/proyectos/tienda-2.webp', alt: 'Paquete elegido y resumen de la recarga, con precios de ejemplo' },
+      { src: '/proyectos/tienda-movil.webp', alt: 'La tienda en el celular' },
+    ],
+  },
+
+  {
     slug: 'hardstore-asesor',
     name: 'HardStore',
     year: '2026',

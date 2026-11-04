@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSeccionesMontadas } from '../../hooks/seccionesDiferidas'
 import { WhatsAppIcon } from '../Logo/whatsapp'
 import { linkWhatsApp } from '../../data/contacto'
 import './whatsappflotante.css'
@@ -12,6 +13,8 @@ import './whatsappflotante.css'
 function WhatsAppFlotante() {
   const [pasoElHero, setPasoElHero] = useState(false)
   const [enContacto, setEnContacto] = useState(false)
+  // Contacto se carga al acercarse: hasta entonces no hay nada que observar
+  const montadas = useSeccionesMontadas()
 
   useEffect(() => {
     const onScroll = () => setPasoElHero(window.scrollY > window.innerHeight * 0.8)
@@ -30,7 +33,7 @@ function WhatsAppFlotante() {
     })
     io.observe(seccion)
     return () => io.disconnect()
-  }, [])
+  }, [montadas])
 
   const visible = pasoElHero && !enContacto
 

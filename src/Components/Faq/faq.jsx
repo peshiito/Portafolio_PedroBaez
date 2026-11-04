@@ -56,7 +56,7 @@ function Faq() {
             const panelId = `${uid}-faq-${i}`
             const btnId = `${uid}-faqbtn-${i}`
             return (
-              <li className={`pb-faq__row ${isOpen ? 'is-open' : ''}`} key={item.q}>
+              <li className={`pb-faq__row pb-reveal ${isOpen ? 'is-open' : ''}`} key={item.q}>
                 <h3 className="pb-faq__heading">
                   <button
                     type="button"
